@@ -1,0 +1,58 @@
+:root {
+  --color-primary: #0f3d2e;
+  --color-secondary: #2e7d32;
+  --color-accent: #4caf50;
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-border: #e5e7eb;
+  --color-text-primary: #1b1b1b;
+  --color-text-secondary: #6b7280;
+  --color-overlay: rgba(27, 27, 27, 0.35);
+  --color-tint: #f1f8f4;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-on-primary: #ffffff;
+  --color-on-secondary: #ffffff;
+  --color-on-accent: #ffffff;
+  --color-on-success: #ffffff;
+  --color-on-warning: #ffffff;
+  --color-on-error: #ffffff;
+  --color-on-primary-muted: rgba(255, 255, 255, 0.82);
+  --color-on-primary-soft: rgba(255, 255, 255, 0.66);
+  --color-border-on-brand: rgba(255, 255, 255, 0.18);
+  --color-header-bg: #2e7d32;
+  --color-header-hover: rgba(76, 175, 80, 0.14);
+
+  --text-h1: clamp(2.75rem, 4.5vw, 3.5rem);
+  --text-h2: clamp(2.25rem, 3.2vw, 2.5rem);
+  --text-h3: clamp(1.75rem, 2.5vw, 2rem);
+  --text-h4: clamp(1.375rem, 1.8vw, 1.5rem);
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-label: 0.8125rem;
+
+  --leading-heading: 1.25;
+  --leading-body: 1.6;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+}
+
+.dark {
+  --color-bg: #0f172a;
+  --color-surface: #111827;
+  --color-border: #1f2937;
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #cbd5e1;
+  --color-overlay: rgba(15, 23, 42, 0.6);
+  --color-tint: rgba(15, 61, 46, 0.22);
+  --color-on-primary-muted: rgba(255, 255, 255, 0.82);
+  --color-on-primary-soft: rgba(255, 255, 255, 0.66);
+  --color-border-on-brand: rgba(255, 255, 255, 0.18);
+  --color-header-bg: rgba(15, 61, 46, 0.88);
+  --color-header-hover: rgba(76, 175, 80, 0.14);
+}

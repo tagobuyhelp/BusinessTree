@@ -1,0 +1,314 @@
+"use client";
+
+import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
+
+import { Button } from "../ui/Button";
+
+function cx(...values) {
+  return values.filter(Boolean).join(" ");
+}
+
+function Icon({ name, className, "aria-hidden": ariaHidden = true }) {
+  return (
+    <span
+      className={cx("material-symbols-outlined select-none leading-none", className)}
+      aria-hidden={ariaHidden}
+    >
+      {name}
+    </span>
+  );
+}
+
+const SERVICES_GROUPS = [
+  {
+    title: "Digital Marketing",
+    items: [
+      { href: "/services/seo", icon: "trending_up", title: "SEO", description: "Organic growth." },
+      {
+        href: "/services/performance-ads",
+        icon: "campaign",
+        title: "Performance Ads",
+        description: "Measured ROI."
+      },
+      {
+        href: "/services/social-media",
+        icon: "insights",
+        title: "Social Media",
+        description: "Demand + awareness."
+      }
+    ]
+  },
+  {
+    title: "Development",
+    items: [
+      {
+        href: "/services/web-development",
+        icon: "code",
+        title: "Web Development",
+        description: "Fast, scalable builds."
+      },
+      {
+        href: "/services/ecommerce",
+        icon: "shopping_cart",
+        title: "E-commerce",
+        description: "Revenue-ready stores."
+      },
+      {
+        href: "/services/landing-pages",
+        icon: "public",
+        title: "Landing Pages",
+        description: "Conversion-first pages."
+      }
+    ]
+  },
+  {
+    title: "Branding",
+    items: [
+      {
+        href: "/services/linkedin-branding",
+        icon: "badge",
+        title: "LinkedIn Branding",
+        description: "Premium presence."
+      },
+      {
+        href: "/services/influencer-marketing",
+        icon: "groups",
+        title: "Influencer Marketing",
+        description: "Trust at scale."
+      },
+      { href: "/services/pr-services", icon: "newsmode", title: "PR Services", description: "Earned media." }
+    ]
+  }
+];
+
+export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
+  const panelRef = useRef(null);
+  const closeBtnRef = useRef(null);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const reduceMotion = useReducedMotion();
+
+  const navLinks = useMemo(
+    () => [
+      { href: "/case-studies", label: "Case Studies", icon: "workspace_premium" },
+      { href: "/about", label: "About", icon: "info" },
+      { href: "/blog", label: "Blog", icon: "article" },
+      { href: "/contact", label: "Contact", icon: "mail" }
+    ],
+    []
+  );
+
+  useEffect(() => {
+    if (!isOpen) return;
+    document.body.classList.add("overflow-hidden");
+    closeBtnRef.current?.focus?.();
+    return () => document.body.classList.remove("overflow-hidden");
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") onClose?.();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isOpen, onClose]);
+
+  const onOverlayMouseDown = useCallback(
+    (e) => {
+      if (e.target === e.currentTarget) onClose?.();
+    },
+    [onClose]
+  );
+
+  const onNavigate = useCallback(() => {
+    setServicesOpen(false);
+    onClose?.();
+  }, [onClose]);
+
+  return (
+    <LazyMotion features={domAnimation}>
+      <AnimatePresence>
+        {isOpen ? (
+          <m.div
+            className="fixed inset-0 z-[60]"
+            onMouseDown={onOverlayMouseDown}
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={reduceMotion ? undefined : { opacity: 1 }}
+            exit={reduceMotion ? undefined : { opacity: 0 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.18 }}
+          >
+            <m.div
+              className="absolute inset-0 bg-overlay"
+              initial={reduceMotion ? false : { opacity: 0 }}
+              animate={reduceMotion ? undefined : { opacity: 1 }}
+              exit={reduceMotion ? undefined : { opacity: 0 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.18 }}
+            />
+
+            <m.div
+              ref={panelRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation"
+              className={cx(
+                "absolute right-0 top-0 h-full w-[88vw] max-w-sm",
+                "border-l border-border bg-surface shadow-lg"
+              )}
+              initial={reduceMotion ? false : { x: "100%" }}
+              animate={reduceMotion ? undefined : { x: 0 }}
+              exit={reduceMotion ? undefined : { x: "100%" }}
+              transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 520, damping: 48 }}
+            >
+              <div className="flex items-center justify-between border-b border-border px-4 py-4">
+                <div className="text-small font-medium text-textPrimary">Menu</div>
+                <button
+                  ref={closeBtnRef}
+                  type="button"
+                  onClick={onClose}
+                  className={cx(
+                    "inline-flex h-10 w-10 items-center justify-center rounded-md",
+                    "text-textPrimary hover:bg-bg",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                  )}
+                  aria-label="Close menu"
+                >
+                  <Icon name="close" className="text-[22px]" />
+                </button>
+              </div>
+
+              <div className="flex h-[calc(100%-72px)] flex-col overflow-y-auto px-4 py-4">
+                <m.div
+                  className="space-y-2"
+                  initial={reduceMotion ? false : "hidden"}
+                  animate={reduceMotion ? undefined : "show"}
+                  variants={{
+                    hidden: { opacity: 0 },
+                    show: { opacity: 1, transition: { staggerChildren: 0.05 } }
+                  }}
+                >
+                  <m.div
+                    variants={{
+                      hidden: { opacity: 0, y: 6 },
+                      show: { opacity: 1, y: 0 }
+                    }}
+                  >
+                    <Link
+                      href="/"
+                      onClick={onNavigate}
+                      className={cx(
+                        "flex items-center gap-3 rounded-md px-3 py-3 text-body font-medium text-textPrimary",
+                        "hover:bg-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                      )}
+                    >
+                      <Icon name="home" className="text-[22px] text-textSecondary" />
+                      <span>Home</span>
+                    </Link>
+                  </m.div>
+
+                  <m.div
+                    variants={{
+                      hidden: { opacity: 0, y: 6 },
+                      show: { opacity: 1, y: 0 }
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setServicesOpen((v) => !v)}
+                      className={cx(
+                        "flex w-full items-center justify-between rounded-md px-3 py-3 text-body font-medium text-textPrimary",
+                        "hover:bg-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                      )}
+                      aria-expanded={servicesOpen}
+                      aria-controls="mobile-services"
+                    >
+                      <span>Services</span>
+                      <Icon name={servicesOpen ? "expand_less" : "expand_more"} className="text-[22px]" />
+                    </button>
+                  </m.div>
+
+                  <AnimatePresence initial={false}>
+                    {servicesOpen ? (
+                      <m.div
+                        id="mobile-services"
+                        className="grid gap-3 overflow-hidden rounded-md border border-border bg-bg p-3"
+                        initial={reduceMotion ? false : { height: 0, opacity: 0 }}
+                        animate={reduceMotion ? undefined : { height: "auto", opacity: 1 }}
+                        exit={reduceMotion ? undefined : { height: 0, opacity: 0 }}
+                        transition={reduceMotion ? { duration: 0 } : { duration: 0.2 }}
+                      >
+                        {SERVICES_GROUPS.map((group) => (
+                          <div key={group.title} className="space-y-2">
+                            <div className="px-1 text-small font-medium text-textSecondary">
+                              {group.title}
+                            </div>
+                            <div className="space-y-1">
+                              {group.items.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={onNavigate}
+                                  className={cx(
+                                    "flex items-start gap-3 rounded-md border border-transparent p-3",
+                                    "hover:border-border hover:bg-surface",
+                                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                                  )}
+                                >
+                                  <Icon name={item.icon} className="mt-0.5 text-[20px] text-textSecondary" />
+                                  <div className="min-w-0">
+                                    <div className="text-small font-medium text-textPrimary">{item.title}</div>
+                                    <div className="mt-0.5 text-small text-textSecondary">{item.description}</div>
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </m.div>
+                    ) : null}
+                  </AnimatePresence>
+
+                  {navLinks.map((l) => (
+                    <m.div
+                      key={l.href}
+                      variants={{
+                        hidden: { opacity: 0, y: 6 },
+                        show: { opacity: 1, y: 0 }
+                      }}
+                    >
+                      <Link
+                        href={l.href}
+                        onClick={onNavigate}
+                        className={cx(
+                          "flex items-center gap-3 rounded-md px-3 py-3 text-body font-medium text-textPrimary",
+                          "hover:bg-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                        )}
+                      >
+                        <Icon name={l.icon} className="text-[22px] text-textSecondary" />
+                        <span>{l.label}</span>
+                      </Link>
+                    </m.div>
+                  ))}
+                </m.div>
+
+                <div className="mt-auto space-y-3 pt-6">
+                  <Button className="w-full" asChild>
+                    <Link href="/contact" onClick={onNavigate}>
+                      Get Free Strategy
+                    </Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full" asChild>
+                    <Link href="/services" onClick={onNavigate}>
+                      View all services
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </m.div>
+          </m.div>
+        ) : null}
+      </AnimatePresence>
+    </LazyMotion>
+  );
+});
