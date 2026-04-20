@@ -3,6 +3,8 @@ import "./../styles/globals.css";
 import Script from "next/script";
 import { Inter, Playfair_Display } from "next/font/google";
 
+import { siteConfig } from "../lib/seo";
+import { organizationJsonLd, websiteJsonLd } from "../lib/structuredData";
 import { ThemeProvider } from "../context/ThemeContext";
 import { Footer } from "../components/layout/Footer";
 import { Header } from "../components/layout/Header";
@@ -40,11 +42,42 @@ const themeInitScript = `
 `;
 
 export const metadata = {
-  title: "Business Tree",
-  description: "Business Tree — design-token driven UI",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`
+  },
+  description: siteConfig.description,
+  keywords: [
+    "Digital Marketing Agency",
+    "SEO Services",
+    "Web Development",
+    "Global Growth",
+    "Performance Marketing",
+    "Conversion Optimization"
+  ],
   icons: {
     icon: "/images/logos/logo2icon.png",
     apple: "/images/logos/logo2icon.png"
+  },
+  openGraph: {
+    type: "website",
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [{ url: "/images/logos/logo2icon.png" }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: ["/images/logos/logo2icon.png"]
+  },
+  robots: {
+    index: true,
+    follow: true
   }
 };
 
@@ -64,6 +97,12 @@ export default function RootLayout({ children }) {
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..700,0..1,-50..200&display=swap"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([organizationJsonLd(), websiteJsonLd()])
+          }}
         />
       </head>
       <body>
