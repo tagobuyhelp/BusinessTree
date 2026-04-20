@@ -34,20 +34,39 @@ export function HeroSection() {
 
   const blobY1 = useTransform(scrollYProgress, [0, 1], [0, 40]);
   const blobY2 = useTransform(scrollYProgress, [0, 1], [0, 70]);
+  const blobY3 = useTransform(scrollYProgress, [0, 1], [0, 55]);
   const visualY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
     <LazyMotion features={domAnimation}>
       <Section id="home" className="py-0">
         <div ref={heroRef} className="relative overflow-hidden bg-gradient-to-br from-primary to-secondary">
-          <div className="pointer-events-none absolute inset-0 opacity-20">
+          {/* ── Decorative blobs ── */}
+          <div className="pointer-events-none absolute inset-0">
+            {/* Top-left warm blob */}
             <m.div
-              className="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-accent blur-3xl"
+              className="absolute -left-32 -top-32 h-[480px] w-[480px] rounded-full bg-accent opacity-[0.12] blur-[80px]"
               style={{ y: reduceMotion ? 0 : blobY1 }}
             />
+            {/* Bottom-right cool blob */}
             <m.div
-              className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-primary blur-3xl"
+              className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-secondary opacity-[0.18] blur-[90px]"
               style={{ y: reduceMotion ? 0 : blobY2 }}
+            />
+            {/* Center mid blob */}
+            <m.div
+              className="absolute left-1/2 top-1/3 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-primary opacity-[0.10] blur-[60px]"
+              style={{ y: reduceMotion ? 0 : blobY3 }}
+            />
+
+            {/* Subtle grid overlay */}
+            <div
+              className="absolute inset-0 opacity-[0.04]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+                backgroundSize: "48px 48px",
+              }}
             />
           </div>
 
