@@ -1,6 +1,7 @@
 "use client";
 
 import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 
@@ -23,62 +24,47 @@ function Icon({ name, className, "aria-hidden": ariaHidden = true }) {
 
 const SERVICES_GROUPS = [
   {
-    title: "Digital Marketing",
     items: [
-      { href: "/services/seo", icon: "trending_up", title: "SEO", description: "Organic growth." },
       {
-        href: "/services/performance-ads",
+        href: "/services/seo",
+        icon: "travel_explore",
+        title: "SEO"
+      },
+      {
+        href: "/services/performance-marketing",
         icon: "campaign",
-        title: "Performance Ads",
-        description: "Measured ROI."
+        title: "Performance Marketing"
+      },
+      {
+        href: "/services/web-development",
+        icon: "code",
+        title: "Web Development"
       },
       {
         href: "/services/social-media",
         icon: "insights",
-        title: "Social Media",
-        description: "Demand + awareness."
-      }
-    ]
-  },
-  {
-    title: "Development",
-    items: [
-      {
-        href: "/services/web-development",
-        icon: "code",
-        title: "Web Development",
-        description: "Fast, scalable builds."
+        title: "Social Media"
       },
       {
-        href: "/services/ecommerce",
-        icon: "shopping_cart",
-        title: "E-commerce",
-        description: "Revenue-ready stores."
+        href: "/services/youtube-growth",
+        icon: "smart_display",
+        title: "YouTube Growth"
       },
-      {
-        href: "/services/landing-pages",
-        icon: "public",
-        title: "Landing Pages",
-        description: "Conversion-first pages."
-      }
-    ]
-  },
-  {
-    title: "Branding",
-    items: [
       {
         href: "/services/linkedin-branding",
         icon: "badge",
-        title: "LinkedIn Branding",
-        description: "Premium presence."
+        title: "LinkedIn Branding"
       },
       {
         href: "/services/influencer-marketing",
         icon: "groups",
-        title: "Influencer Marketing",
-        description: "Trust at scale."
+        title: "Influencer Marketing"
       },
-      { href: "/services/pr-services", icon: "newsmode", title: "PR Services", description: "Earned media." }
+      {
+        href: "/services/pr-authority",
+        icon: "verified",
+        title: "PR & Authority"
+      }
     ]
   }
 ];
@@ -86,6 +72,7 @@ const SERVICES_GROUPS = [
 export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
   const panelRef = useRef(null);
   const closeBtnRef = useRef(null);
+  const previousFocusRef = useRef(null);
   const [servicesOpen, setServicesOpen] = useState(false);
   const reduceMotion = useReducedMotion();
 
@@ -102,14 +89,43 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
   useEffect(() => {
     if (!isOpen) return;
     document.body.classList.add("overflow-hidden");
+    setServicesOpen(false);
+    previousFocusRef.current = document.activeElement;
     closeBtnRef.current?.focus?.();
-    return () => document.body.classList.remove("overflow-hidden");
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+      previousFocusRef.current?.focus?.();
+    };
   }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
     const onKeyDown = (e) => {
       if (e.key === "Escape") onClose?.();
+      if (e.key !== "Tab") return;
+
+      const panel = panelRef.current;
+      if (!panel) return;
+
+      const focusables = panel.querySelectorAll(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      );
+      const list = Array.from(focusables).filter((el) => el.getClientRects().length > 0);
+      if (list.length === 0) return;
+
+      const first = list[0];
+      const last = list[list.length - 1];
+      const active = document.activeElement;
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+        return;
+      }
+      if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
@@ -153,7 +169,7 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
               aria-modal="true"
               aria-label="Mobile navigation"
               className={cx(
-                "absolute right-0 top-0 h-full w-[88vw] max-w-sm",
+                "absolute right-0 top-0 h-full w-full sm:max-w-md",
                 "border-l border-border bg-surface shadow-lg"
               )}
               initial={reduceMotion ? false : { x: "100%" }}
@@ -162,13 +178,31 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
               transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 520, damping: 48 }}
             >
               <div className="flex items-center justify-between border-b border-border px-4 py-4">
-                <div className="text-small font-medium text-textPrimary">Menu</div>
+                <Link
+                  href="/"
+                  onClick={onNavigate}
+                  className={cx(
+                    "inline-flex min-h-[44px] items-center gap-2 rounded-md pr-2",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                  )}
+                  aria-label="Business Tree home"
+                >
+                  <Image
+                    src="/images/logos/logo2iconwhite.png"
+                    alt="Business Tree"
+                    width={160}
+                    height={52}
+                    className="block h-9 w-auto"
+                    priority
+                  />
+                  <span className="font-heading text-body font-semibold text-textPrimary">Business Tree</span>
+                </Link>
                 <button
                   ref={closeBtnRef}
                   type="button"
                   onClick={onClose}
                   className={cx(
-                    "inline-flex h-10 w-10 items-center justify-center rounded-md",
+                    "inline-flex h-11 w-11 items-center justify-center rounded-md",
                     "text-textPrimary hover:bg-bg",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                   )}
@@ -178,7 +212,8 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
                 </button>
               </div>
 
-              <div className="flex h-[calc(100%-72px)] flex-col overflow-y-auto px-4 py-4">
+              <div className="flex h-[calc(100%-72px)] flex-col">
+                <div className="flex-1 overflow-y-auto px-4 py-4">
                 <m.div
                   className="space-y-2"
                   initial={reduceMotion ? false : "hidden"}
@@ -198,8 +233,8 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
                       href="/"
                       onClick={onNavigate}
                       className={cx(
-                        "flex items-center gap-3 rounded-md px-3 py-3 text-body font-medium text-textPrimary",
-                        "hover:bg-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                        "flex min-h-[44px] items-center gap-3 rounded-md px-3 py-3 text-body font-medium text-textPrimary",
+                        "hover:bg-bg active:bg-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                       )}
                     >
                       <Icon name="home" className="text-[22px] text-textSecondary" />
@@ -217,13 +252,16 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
                       type="button"
                       onClick={() => setServicesOpen((v) => !v)}
                       className={cx(
-                        "flex w-full items-center justify-between rounded-md px-3 py-3 text-body font-medium text-textPrimary",
+                        "flex w-full min-h-[44px] items-center justify-between rounded-md px-3 py-3 text-body font-semibold text-textPrimary",
                         "hover:bg-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                       )}
                       aria-expanded={servicesOpen}
                       aria-controls="mobile-services"
                     >
-                      <span>Services</span>
+                      <span className="inline-flex items-center gap-3">
+                        <Icon name="grid_view" className="text-[22px] text-textSecondary" />
+                        <span>Services</span>
+                      </span>
                       <Icon name={servicesOpen ? "expand_less" : "expand_more"} className="text-[22px]" />
                     </button>
                   </m.div>
@@ -232,37 +270,29 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
                     {servicesOpen ? (
                       <m.div
                         id="mobile-services"
-                        className="grid gap-3 overflow-hidden rounded-md border border-border bg-bg p-3"
+                        className="grid gap-2 overflow-hidden rounded-xl border border-border bg-bg p-2"
                         initial={reduceMotion ? false : { height: 0, opacity: 0 }}
                         animate={reduceMotion ? undefined : { height: "auto", opacity: 1 }}
                         exit={reduceMotion ? undefined : { height: 0, opacity: 0 }}
                         transition={reduceMotion ? { duration: 0 } : { duration: 0.2 }}
                       >
                         {SERVICES_GROUPS.map((group) => (
-                          <div key={group.title} className="space-y-2">
-                            <div className="px-1 text-small font-medium text-textSecondary">
-                              {group.title}
-                            </div>
-                            <div className="space-y-1">
+                          <div key="services" className="space-y-1">
                               {group.items.map((item) => (
                                 <Link
                                   key={item.href}
                                   href={item.href}
                                   onClick={onNavigate}
                                   className={cx(
-                                    "flex items-start gap-3 rounded-md border border-transparent p-3",
-                                    "hover:border-border hover:bg-surface",
+                                    "flex min-h-[44px] items-center gap-3 rounded-lg border border-transparent px-3 py-2.5",
+                                    "hover:border-border hover:bg-surface active:bg-surface",
                                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
                                   )}
                                 >
-                                  <Icon name={item.icon} className="mt-0.5 text-[20px] text-textSecondary" />
-                                  <div className="min-w-0">
-                                    <div className="text-small font-medium text-textPrimary">{item.title}</div>
-                                    <div className="mt-0.5 text-small text-textSecondary">{item.description}</div>
-                                  </div>
+                                  <Icon name={item.icon} className="text-[22px] text-textSecondary" />
+                                  <span className="text-body font-medium text-textPrimary">{item.title}</span>
                                 </Link>
                               ))}
-                            </div>
                           </div>
                         ))}
                       </m.div>
@@ -281,8 +311,8 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
                         href={l.href}
                         onClick={onNavigate}
                         className={cx(
-                          "flex items-center gap-3 rounded-md px-3 py-3 text-body font-medium text-textPrimary",
-                          "hover:bg-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                          "flex min-h-[44px] items-center gap-3 rounded-md px-3 py-3 text-body font-medium text-textPrimary",
+                          "hover:bg-bg active:bg-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                         )}
                       >
                         <Icon name={l.icon} className="text-[22px] text-textSecondary" />
@@ -292,17 +322,48 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
                   ))}
                 </m.div>
 
-                <div className="mt-auto space-y-3 pt-6">
+                <div className="mt-8 rounded-2xl border border-border bg-tint p-4">
+                  <div className="text-small font-semibold text-textPrimary">Quick links</div>
+                  <div className="mt-3 grid gap-2">
+                    <Link
+                      href="/services"
+                      onClick={onNavigate}
+                      className={cx(
+                        "flex min-h-[44px] items-center justify-between rounded-lg border border-border bg-surface px-3 py-2.5 text-body font-medium text-textPrimary",
+                        "hover:bg-bg active:bg-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-tint"
+                      )}
+                    >
+                      <span className="inline-flex items-center gap-3">
+                        <Icon name="apps" className="text-[22px] text-textSecondary" />
+                        <span>All Services</span>
+                      </span>
+                      <Icon name="arrow_forward" className="text-[20px] text-textSecondary" />
+                    </Link>
+                    <Link
+                      href="/careers"
+                      onClick={onNavigate}
+                      className={cx(
+                        "flex min-h-[44px] items-center justify-between rounded-lg border border-border bg-surface px-3 py-2.5 text-body font-medium text-textPrimary",
+                        "hover:bg-bg active:bg-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-tint"
+                      )}
+                    >
+                      <span className="inline-flex items-center gap-3">
+                        <Icon name="work" className="text-[22px] text-textSecondary" />
+                        <span>Careers</span>
+                      </span>
+                      <Icon name="arrow_forward" className="text-[20px] text-textSecondary" />
+                    </Link>
+                  </div>
+                </div>
+                </div>
+
+                <div className="border-t border-border bg-surface px-4 py-4">
                   <Button className="w-full" asChild>
                     <Link href="/contact" onClick={onNavigate}>
                       Get Free Strategy
                     </Link>
                   </Button>
-                  <Button variant="ghost" className="w-full" asChild>
-                    <Link href="/services" onClick={onNavigate}>
-                      View all services
-                    </Link>
-                  </Button>
+                  <div className="mt-3 text-center text-[12px] text-textSecondary">No spam. No commitment.</div>
                 </div>
               </div>
             </m.div>

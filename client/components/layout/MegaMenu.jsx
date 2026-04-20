@@ -40,30 +40,101 @@ function Icon({ name, className, "aria-hidden": ariaHidden = true }) {
 
 const DEFAULT_GROUPS = [
   {
-    id: "marketing",
+    id: "digital-marketing",
     title: "Digital Marketing",
     icon: "trending_up",
-    color: "text-emerald-400",
-    dot: "bg-emerald-400",
+    color: "text-emerald-500",
+    dot: "bg-emerald-500",
     items: [
       {
-        href: "/services/seo",
-        icon: "travel_explore",
-        title: "SEO",
-        description: "Rank higher and convert intent-driven traffic.",
-        tag: "Popular",
-      },
-      {
-        href: "/services/performance-ads",
-        icon: "campaign",
-        title: "Performance Ads",
-        description: "Paid growth with clear reporting and ROI.",
+        href: "/services/digital-marketing",
+        icon: "insights",
+        title: "Digital Marketing Strategy",
+        description: "A channel plan designed for qualified leads."
       },
       {
         href: "/services/social-media",
-        icon: "insights",
-        title: "Social Media",
-        description: "Build awareness and demand across channels.",
+        icon: "groups",
+        title: "Social Media Management",
+        description: "Consistent content that builds demand and trust."
+      },
+      {
+        href: "/services/youtube-growth",
+        icon: "smart_display",
+        title: "YouTube Growth",
+        description: "Turn attention into traffic, leads, and sales."
+      },
+      {
+        href: "/services/linkedin-branding",
+        icon: "badge",
+        title: "LinkedIn Branding",
+        description: "Authority-building content for founders and teams."
+      }
+    ],
+  },
+  {
+    id: "seo",
+    title: "SEO",
+    icon: "travel_explore",
+    color: "text-amber-500",
+    dot: "bg-amber-500",
+    items: [
+      {
+        href: "/services/seo#local",
+        icon: "location_on",
+        title: "Local SEO",
+        description: "Win the map pack and drive calls & leads."
+      },
+      {
+        href: "/services/seo#technical",
+        icon: "settings",
+        title: "Technical SEO",
+        description: "Indexing, speed, and site health fixes."
+      },
+      {
+        href: "/services/seo#content",
+        icon: "edit_document",
+        title: "Content SEO",
+        description: "Rank for high-intent queries that convert."
+      },
+      {
+        href: "/services/seo#global",
+        icon: "public",
+        title: "Global SEO",
+        description: "Scale content and structure across markets."
+      }
+    ],
+  },
+  {
+    id: "performance-marketing",
+    title: "Performance Marketing",
+    icon: "campaign",
+    color: "text-sky-500",
+    dot: "bg-sky-500",
+    items: [
+      {
+        href: "/services/performance-marketing#meta",
+        icon: "ads_click",
+        title: "Meta Ads",
+        description: "Creative testing + scaling with CPA guardrails."
+      },
+      {
+        href: "/services/performance-marketing#google",
+        icon: "manage_search",
+        title: "Google Search",
+        description: "High-intent traffic with conversion-first landing."
+      },
+      {
+        href: "/services/performance-marketing#tracking",
+        icon: "track_changes",
+        title: "Tracking & Analytics",
+        description: "Clean attribution you can trust for decisions."
+      },
+      {
+        href: "/services/performance-marketing#cro",
+        icon: "tune",
+        title: "CRO & Testing",
+        description: "Improve conversion rates without more spend."
       },
     ],
   },
@@ -71,54 +142,65 @@ const DEFAULT_GROUPS = [
     id: "development",
     title: "Development",
     icon: "code",
-    color: "text-sky-400",
-    dot: "bg-sky-400",
+    color: "text-indigo-500",
+    dot: "bg-indigo-500",
     items: [
       {
         href: "/services/web-development",
         icon: "computer",
         title: "Web Development",
-        description: "High-performance websites built to scale.",
+        description: "Fast, scalable sites built for conversion."
       },
       {
         href: "/services/ecommerce",
         icon: "shopping_cart",
         title: "E-commerce",
-        description: "Optimised storefronts that increase revenue.",
-        tag: "New",
+        description: "Revenue-ready stores with clean UX."
       },
       {
-        href: "/services/landing-pages",
-        icon: "web",
-        title: "Landing Pages",
-        description: "Conversion-first pages for campaigns and funnels.",
+        href: "/services/web-development#performance",
+        icon: "speed",
+        title: "Performance Optimisation",
+        description: "Core Web Vitals improvements that reduce drop-off."
+      },
+      {
+        href: "/services/web-development#maintenance",
+        icon: "construction",
+        title: "Maintenance & Iteration",
+        description: "Ship improvements continuously without chaos."
       },
     ],
   },
   {
-    id: "branding",
-    title: "Branding",
-    icon: "auto_awesome",
-    color: "text-violet-400",
-    dot: "bg-violet-400",
+    id: "branding-growth",
+    title: "Branding & Growth",
+    icon: "workspace_premium",
+    color: "text-violet-500",
+    dot: "bg-violet-500",
     items: [
       {
         href: "/services/linkedin-branding",
         icon: "badge",
         title: "LinkedIn Branding",
-        description: "Premium positioning for founders and teams.",
+        description: "Positioning that builds authority and demand."
       },
       {
         href: "/services/influencer-marketing",
         icon: "groups",
         title: "Influencer Marketing",
-        description: "Partner campaigns that build trust fast.",
+        description: "Partnerships that scale trust and reach."
       },
       {
-        href: "/services/pr-services",
-        icon: "newsmode",
-        title: "PR Services",
-        description: "Earned media that strengthens credibility.",
+        href: "/services/pr-authority",
+        icon: "verified",
+        title: "PR & Authority",
+        description: "Credibility signals that shorten sales cycles."
+      },
+      {
+        href: "/services/youtube-growth",
+        icon: "smart_display",
+        title: "YouTube Growth",
+        description: "Build audience and convert attention to leads."
       },
     ],
   },
@@ -152,10 +234,17 @@ const rowVariants = {
 };
 
 /* ── Sub-components ── */
-function CategoryTab({ group, isActive, onClick }) {
+const CategoryTab = forwardRef(function CategoryTab({ group, isActive, onClick, onKeyDown }, ref) {
   return (
     <button
+      ref={ref}
       onClick={() => onClick(group.id)}
+      onMouseEnter={() => onClick(group.id)}
+      role="tab"
+      aria-selected={isActive}
+      aria-controls={`mega-panel-${group.id}`}
+      data-mega-category={group.id}
+      onKeyDown={onKeyDown}
       className={cx(
         "group flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-all duration-150",
         isActive
@@ -196,51 +285,50 @@ function CategoryTab({ group, isActive, onClick }) {
       )}
     </button>
   );
-}
+});
 
 function ServiceItem({ item, onItemClick, reduceMotion }) {
   return (
     <m.li variants={reduceMotion ? {} : rowVariants}>
-      <Link
-        href={item.href}
-        onClick={onItemClick}
-        className={cx(
-          "group relative flex items-start gap-3.5 rounded-xl border border-transparent p-3.5",
-          "transition-all duration-150",
-          "hover:border-border hover:bg-bg hover:shadow-sm",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
-        )}
+      <m.div
+        whileHover={reduceMotion ? undefined : { y: -1, scale: 1.01 }}
+        transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 520, damping: 44 }}
       >
-        {/* Icon bubble */}
-        <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-border bg-surface transition-colors duration-150 group-hover:border-accent/30 group-hover:bg-accent/5">
-          <Icon
-            name={item.icon}
-            className="text-[18px] text-textSecondary transition-colors duration-150 group-hover:text-accent"
-          />
-        </span>
+        <Link
+          href={item.href}
+          onClick={onItemClick}
+          className={cx(
+            "group relative flex items-start gap-3.5 rounded-xl border border-transparent p-3.5",
+            "transition-all duration-150",
+            "hover:border-border hover:bg-bg hover:shadow-sm",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+          )}
+        >
+          <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-border bg-surface transition-colors duration-150 group-hover:border-accent/30 group-hover:bg-accent/5">
+            <Icon
+              name={item.icon}
+              className="text-[18px] text-textSecondary transition-colors duration-150 group-hover:text-accent"
+            />
+          </span>
 
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <span className="text-[13.5px] font-semibold text-textPrimary">
-              {item.title}
-            </span>
-            {item.tag && (
-              <span className="rounded-full bg-accent/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
-                {item.tag}
-              </span>
-            )}
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2">
+              <span className="text-[13.5px] font-semibold text-textPrimary">{item.title}</span>
+              {item.tag && (
+                <span className="rounded-full bg-accent/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
+                  {item.tag}
+                </span>
+              )}
+            </div>
+            <p className="mt-0.5 text-[12.5px] leading-snug text-textSecondary">{item.description}</p>
           </div>
-          <p className="mt-0.5 text-[12.5px] leading-snug text-textSecondary">
-            {item.description}
-          </p>
-        </div>
 
-        {/* Hover arrow */}
-        <Icon
-          name="arrow_forward"
-          className="mt-1 flex-shrink-0 text-[15px] text-transparent transition-all duration-150 group-hover:text-accent group-hover:translate-x-0.5"
-        />
-      </Link>
+          <Icon
+            name="arrow_forward"
+            className="mt-1 flex-shrink-0 text-[15px] text-transparent transition-all duration-150 group-hover:text-accent group-hover:translate-x-0.5"
+          />
+        </Link>
+      </m.div>
     </m.li>
   );
 }
@@ -259,6 +347,7 @@ export const MegaMenu = memo(
     forwardedRef
   ) {
     const internalRef = useRef(null);
+    const firstCategoryRef = useRef(null);
     const reduceMotion = useReducedMotion();
     const groups = useMemo(() => DEFAULT_GROUPS, []);
     const [activeGroup, setActiveGroup] = useState(groups[0].id);
@@ -292,6 +381,38 @@ export const MegaMenu = memo(
       if (!isOpen) setActiveGroup(groups[0].id);
     }, [isOpen, groups]);
 
+    useEffect(() => {
+      if (!isOpen) return;
+      window.setTimeout(() => {
+        firstCategoryRef.current?.focus?.();
+      }, 0);
+    }, [isOpen]);
+
+    const onCategoryKeyDown = useCallback(
+      (e) => {
+        if (e.key !== "ArrowDown" && e.key !== "ArrowUp" && e.key !== "Home" && e.key !== "End") return;
+        e.preventDefault();
+
+        const index = groups.findIndex((g) => g.id === activeGroup);
+        const lastIndex = groups.length - 1;
+        const nextIndex =
+          e.key === "Home"
+            ? 0
+            : e.key === "End"
+              ? lastIndex
+              : e.key === "ArrowDown"
+                ? Math.min(lastIndex, index + 1)
+                : Math.max(0, index - 1);
+
+        const nextId = groups[nextIndex]?.id;
+        if (!nextId) return;
+        setActiveGroup(nextId);
+        const nextButton = internalRef.current?.querySelector?.(`[data-mega-category="${nextId}"]`);
+        nextButton?.focus?.();
+      },
+      [activeGroup, groups]
+    );
+
     const handleBlur = useCallback(
       (e) => {
         const next = e.relatedTarget;
@@ -313,31 +434,34 @@ export const MegaMenu = memo(
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
               onBlur={handleBlur}
-              className="fixed left-0 right-0 top-[64px] z-50 border-b border-border bg-surface shadow-xl shadow-black/[0.06]"
+              className="fixed left-0 right-0 top-[80px] z-50"
               variants={reduceMotion ? {} : panelVariants}
               initial={reduceMotion ? false : "hidden"}
               animate={reduceMotion ? undefined : "show"}
               exit={reduceMotion ? undefined : "exit"}
             >
-              {/* Top accent line */}
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
-
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex gap-0 py-5">
+                <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-xl shadow-black/[0.08]">
+                  <div className="h-[2px] bg-gradient-to-r from-transparent via-accent/55 to-transparent" />
+                  <div className="grid grid-cols-12 gap-0 p-5">
 
                   {/* ── Left: category tabs ── */}
-                  <div className="w-[200px] flex-shrink-0 space-y-0.5 border-r border-border pr-4 pt-1">
+                  <div className="col-span-3 space-y-0.5 border-r border-border pr-5 pt-1">
                     <p className="mb-2.5 px-3 text-[11px] font-semibold uppercase tracking-widest text-textTertiary">
                       Services
                     </p>
-                    {groups.map((group) => (
-                      <CategoryTab
-                        key={group.id}
-                        group={group}
-                        isActive={activeGroup === group.id}
-                        onClick={setActiveGroup}
-                      />
-                    ))}
+                    <div role="tablist" aria-label="Service categories" className="space-y-0.5">
+                      {groups.map((group, idx) => (
+                        <CategoryTab
+                          key={group.id}
+                          group={group}
+                          isActive={activeGroup === group.id}
+                          onClick={setActiveGroup}
+                          onKeyDown={onCategoryKeyDown}
+                          ref={idx === 0 ? firstCategoryRef : undefined}
+                        />
+                      ))}
+                    </div>
 
                     {/* Bottom link */}
                     <div className="pt-3">
@@ -353,10 +477,13 @@ export const MegaMenu = memo(
                   </div>
 
                   {/* ── Center: items for active group ── */}
-                  <div className="flex-1 px-5">
+                  <div className="col-span-6 px-5">
                     <AnimatePresence mode="wait">
                       <m.div
                         key={activeGroup}
+                        id={`mega-panel-${activeGroup}`}
+                        role="tabpanel"
+                        aria-label={`${activeData.title} services`}
                         initial={reduceMotion ? false : { opacity: 0, x: 6 }}
                         animate={reduceMotion ? undefined : { opacity: 1, x: 0 }}
                         exit={reduceMotion ? undefined : { opacity: 0, x: -6 }}
@@ -371,7 +498,7 @@ export const MegaMenu = memo(
                         </div>
 
                         <m.ul
-                          className="space-y-1"
+                          className="grid grid-cols-2 gap-2"
                           variants={reduceMotion ? {} : listVariants}
                           initial="hidden"
                           animate="show"
@@ -390,7 +517,7 @@ export const MegaMenu = memo(
                   </div>
 
                   {/* ── Right: featured card ── */}
-                  <div className="w-[240px] flex-shrink-0 pl-5">
+                  <div className="col-span-3 pl-5">
                     <m.div
                       className="relative overflow-hidden rounded-xl border border-border bg-bg p-5"
                       whileHover={
@@ -409,20 +536,17 @@ export const MegaMenu = memo(
                       <div className="pointer-events-none absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-accent opacity-[0.05] blur-xl" />
 
                       <div className="relative">
-                        {/* Badge */}
-                        <span className="inline-flex items-center gap-1 rounded-full border border-accent/20 bg-accent/8 px-2 py-0.5 text-[10.5px] font-semibold uppercase tracking-wide text-accent">
-                          <Icon name="bolt" className="text-[12px]" />
-                          Most Popular
+                        <span className="inline-flex items-center gap-1 rounded-full border border-border bg-surface px-2 py-0.5 text-[10.5px] font-semibold uppercase tracking-wide text-textSecondary">
+                          <Icon name="auto_awesome" className="text-[12px]" />
+                          Recommended
                         </span>
 
-                        {/* Title */}
-                        <h3 className="mt-3 text-[14px] font-bold leading-snug text-textPrimary">
-                          Growth Sprint
+                        <h3 className="mt-3 text-[15px] font-bold leading-snug text-textPrimary">
+                          Grow your business with proven strategies
                         </h3>
 
-                        {/* Description */}
-                        <p className="mt-1.5 text-[12px] leading-relaxed text-textSecondary">
-                          A focused 2-week engagement to uncover quick wins and roadmap your growth priorities.
+                        <p className="mt-1.5 text-[12.5px] leading-relaxed text-textSecondary">
+                          Get a free strategy tailored to your goals, channels, and conversion opportunities.
                         </p>
 
                         {/* Divider */}
@@ -431,9 +555,9 @@ export const MegaMenu = memo(
                         {/* Proof points */}
                         <ul className="mb-4 space-y-1.5">
                           {[
-                            "Full audit & strategy doc",
-                            "3 priority experiments",
-                            "Dedicated Slack channel",
+                            "Clarity on what to do next",
+                            "Quick wins + roadmap",
+                            "Measurable growth plan",
                           ].map((point) => (
                             <li
                               key={point}
@@ -450,7 +574,7 @@ export const MegaMenu = memo(
 
                         <Button asChild size="sm" className="w-full">
                           <Link href="/contact" onClick={onItemClick}>
-                            Start Growing Now
+                            Get Free Strategy
                           </Link>
                         </Button>
                       </div>
@@ -465,6 +589,7 @@ export const MegaMenu = memo(
                       <Icon name="stacked_line_chart" className="text-[14px]" />
                       <span>View case studies</span>
                     </Link>
+                  </div>
                   </div>
                 </div>
               </div>
