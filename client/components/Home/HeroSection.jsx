@@ -80,7 +80,7 @@ export function HeroSection() {
                       label="Get Free Strategy"
                       icon="bolt"
                       fullWidth
-                      className="bg-white text-black hover:bg-secondary hover:text-onAccent active:bg-accent"
+                      className="bg-headerBg text-onPrimary hover:bg-secondary hover:text-onAccent active:bg-accent"
                     />
                     <Button
                       size="lg"
