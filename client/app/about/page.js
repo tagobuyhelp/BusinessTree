@@ -1,6 +1,4 @@
-import Link from "next/link";
-
-import { Section, SectionInner } from "../../components/ui/Section";
+import { AboutPage as AboutPageView } from "../../components/About/AboutPage";
 import { buildMetadata } from "../../lib/seo";
 
 export const metadata = buildMetadata({
@@ -12,23 +10,5 @@ export const metadata = buildMetadata({
 });
 
 export default function AboutPage() {
-  return (
-    <main>
-      <Section className="py-12 sm:py-16">
-        <SectionInner>
-          <h1 className="text-h1">About Business Tree</h1>
-          <p className="mt-4 max-w-2xl text-body text-textSecondary">
-            We build growth systems for modern teams—combining strategy, execution, and data-driven optimization to
-            improve leads, conversions, and revenue.
-          </p>
-          <div className="mt-8">
-            <Link className="text-accent underline underline-offset-4" href="/contact">
-              Get Free Strategy →
-            </Link>
-          </div>
-        </SectionInner>
-      </Section>
-    </main>
-  );
+  return <AboutPageView />;
 }
-

@@ -1,15 +1,13 @@
-import Link from "next/link";
-
-import { Section, SectionInner } from "../../../components/ui/Section";
+import { YouTubeGrowthPage as YouTubeGrowthPageView } from "../../../components/Services/YouTubeGrowthPage";
 import { absoluteUrl, buildMetadata } from "../../../lib/seo";
 import { serviceJsonLd } from "../../../lib/structuredData";
 
 export const metadata = buildMetadata({
-  title: "YouTube Growth for Reach & Leads",
+  title: "YouTube SEO Services for Channel Growth",
   description:
-    "Grow reach and leads with YouTube strategy, optimization, and content systems. Build authority and drive consistent demand without fluff.",
+    "YouTube SEO services and creator growth systems to rank videos, improve retention, and scale your channel. Get a YouTube growth plan today.",
   pathname: "/services/youtube-growth",
-  keywords: ["YouTube Growth", "Brand Authority", "Digital Marketing Agency", "Global Growth"]
+  keywords: ["YouTube SEO Services", "YouTube Growth Agency", "YouTube Channel Growth", "YouTube SEO", "Creator Growth"]
 });
 
 export default function YoutubeGrowthPage() {
@@ -22,20 +20,7 @@ export default function YoutubeGrowthPage() {
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Section className="py-12 sm:py-16">
-        <SectionInner>
-          <h1 className="text-h1">YouTube Growth</h1>
-          <p className="mt-4 max-w-2xl text-body text-textSecondary">
-            Build a channel strategy that compounds views, trust, and pipeline over time.
-          </p>
-          <div className="mt-8">
-            <Link className="text-accent underline underline-offset-4" href="/contact">
-              Get Free Strategy →
-            </Link>
-          </div>
-        </SectionInner>
-      </Section>
+      <YouTubeGrowthPageView />
     </main>
   );
 }
-

@@ -1,5 +1,4 @@
-import { CTAButton } from "../../components/ui/CTAButton";
-import { Section, SectionInner } from "../../components/ui/Section";
+import { ContactPage as ContactPageView } from "../../components/Contact/ContactPage";
 import { buildMetadata } from "../../lib/seo";
 
 export const metadata = buildMetadata({
@@ -12,19 +11,6 @@ export const metadata = buildMetadata({
 
 export default function ContactPage() {
   return (
-    <main>
-      <Section className="py-12 sm:py-16">
-        <SectionInner>
-          <h1 className="text-h1">Get Free Strategy</h1>
-          <p className="mt-4 max-w-2xl text-body text-textSecondary">
-            Share a few details and we’ll send a clear growth plan focused on leads, conversions, and measurable ROI.
-          </p>
-          <div className="mt-8 max-w-md">
-            <CTAButton label="Get Free Strategy" fullWidth />
-          </div>
-        </SectionInner>
-      </Section>
-    </main>
+    <ContactPageView />
   );
 }
-

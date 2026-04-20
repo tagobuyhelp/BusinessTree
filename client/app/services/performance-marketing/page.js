@@ -1,15 +1,13 @@
-import Link from "next/link";
-
-import { Section, SectionInner } from "../../../components/ui/Section";
+import { PerformanceMarketingPage as PerformanceMarketingPageView } from "../../../components/Services/PerformanceMarketingPage";
 import { absoluteUrl, buildMetadata } from "../../../lib/seo";
 import { serviceJsonLd } from "../../../lib/structuredData";
 
 export const metadata = buildMetadata({
-  title: "Performance Marketing That Drives ROI",
+  title: "Performance Marketing Services That Drive ROI",
   description:
-    "Acquire customers with performance marketing built for ROI: tracking, creative, and conversion-first landing pages. Get your free strategy today.",
+    "Scale paid acquisition with performance marketing services built for ROI: Meta ads, Google ads management, tracking, creative testing, and conversion-first funnels. Get a free ad strategy today.",
   pathname: "/services/performance-marketing",
-  keywords: ["Performance Marketing", "Paid Ads", "Conversion Optimization", "Global Growth", "Digital Marketing Agency"]
+  keywords: ["Performance Marketing Services", "Facebook Ads Agency", "Google Ads Management", "Paid Ads", "Conversion Optimization", "Digital Marketing Agency"]
 });
 
 export default function PerformanceMarketingPage() {
@@ -22,20 +20,7 @@ export default function PerformanceMarketingPage() {
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Section className="py-12 sm:py-16">
-        <SectionInner>
-          <h1 className="text-h1">Performance Marketing</h1>
-          <p className="mt-4 max-w-2xl text-body text-textSecondary">
-            Scale paid acquisition with clear tracking, stronger conversion, and better unit economics.
-          </p>
-          <div className="mt-8">
-            <Link className="text-accent underline underline-offset-4" href="/contact">
-              Get Free Strategy →
-            </Link>
-          </div>
-        </SectionInner>
-      </Section>
+      <PerformanceMarketingPageView />
     </main>
   );
 }
-

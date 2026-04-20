@@ -111,9 +111,14 @@ export function CaseStudyCard({
             <div className="mt-4 flex h-full flex-col">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <div className="font-body tabular-nums text-[2.15rem] font-bold leading-none text-secondary">
+                  <m.div
+                    className="font-body tabular-nums text-[2.15rem] font-bold leading-none text-secondary"
+                    initial={reduceMotion ? false : { opacity: 0, y: 6, scale: 0.98 }}
+                    animate={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+                    transition={reduceMotion ? undefined : { duration: 0.28, ease: "easeOut" }}
+                  >
                     {heroValue}
-                  </div>
+                  </m.div>
                   <div className="mt-2 text-[11px] font-medium text-textSecondary line-clamp-1">
                     {heroLabel || "Result"}
                   </div>

@@ -1,15 +1,13 @@
-import Link from "next/link";
-
-import { Section, SectionInner } from "../../../components/ui/Section";
+import { LinkedInPage as LinkedInPageView } from "../../../components/Services/LinkedInPage";
 import { absoluteUrl, buildMetadata } from "../../../lib/seo";
 import { serviceJsonLd } from "../../../lib/structuredData";
 
 export const metadata = buildMetadata({
-  title: "LinkedIn Personal Branding for Pipeline",
+  title: "LinkedIn Marketing Services for CEO Personal Branding",
   description:
-    "Position founders and teams to attract pipeline and partnerships with LinkedIn personal branding. Clear positioning, content systems, and authority.",
+    "LinkedIn marketing services and personal branding systems for CEOs and founders. Profile optimization, thought leadership, and consistent growth to drive inbound leads.",
   pathname: "/services/linkedin-branding",
-  keywords: ["LinkedIn Personal Branding", "Brand Authority", "Global Growth", "Digital Marketing Agency"]
+  keywords: ["LinkedIn Marketing Services", "Personal Branding Agency", "LinkedIn Growth", "CEO Personal Branding", "LinkedIn Personal Branding"]
 });
 
 export default function LinkedinBrandingPage() {
@@ -22,20 +20,7 @@ export default function LinkedinBrandingPage() {
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Section className="py-12 sm:py-16">
-        <SectionInner>
-          <h1 className="text-h1">LinkedIn Personal Branding</h1>
-          <p className="mt-4 max-w-2xl text-body text-textSecondary">
-            Build authority and trust with consistent, high-signal content that converts into conversations.
-          </p>
-          <div className="mt-8">
-            <Link className="text-accent underline underline-offset-4" href="/contact">
-              Get Free Strategy →
-            </Link>
-          </div>
-        </SectionInner>
-      </Section>
+      <LinkedInPageView />
     </main>
   );
 }
-

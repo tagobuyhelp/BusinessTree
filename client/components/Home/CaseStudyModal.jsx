@@ -54,6 +54,8 @@ export function CaseStudyModal({ open, onClose, caseStudy }) {
     const title = caseStudy?.title || caseStudy?.industry || "Case Study";
     const industry = caseStudy?.industry;
     const problem = caseStudy?.problemLong || caseStudy?.problem;
+    const strategyPoints = caseStudy?.strategyPoints || [];
+    const executionPoints = caseStudy?.executionPoints || [];
     const solutionPoints = caseStudy?.solutionPoints || (caseStudy?.solution ? [caseStudy.solution] : []);
     const results = caseStudy?.results || [];
 
@@ -132,17 +134,45 @@ export function CaseStudyModal({ open, onClose, caseStudy }) {
                                                 <p className="mt-2 text-body text-textSecondary">{problem}</p>
                                             </div>
 
-                                            <div>
-                                                <div className="text-[11px] font-medium text-textSecondary">Solution</div>
-                                                <ul className="mt-3 space-y-2">
-                                                    {solutionPoints.map((p) => (
-                                                        <li key={p} className="flex items-start gap-2 text-small text-textSecondary">
-                                                            <Icon name="check_circle" className="mt-0.5 text-[18px] text-accent" />
-                                                            <span>{p}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
+                                            {strategyPoints.length > 0 ? (
+                                                <div>
+                                                    <div className="text-[11px] font-medium text-textSecondary">Strategy</div>
+                                                    <ul className="mt-3 space-y-2">
+                                                        {strategyPoints.map((p) => (
+                                                            <li key={p} className="flex items-start gap-2 text-small text-textSecondary">
+                                                                <Icon name="check_circle" className="mt-0.5 text-[18px] text-accent" />
+                                                                <span>{p}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            ) : null}
+
+                                            {executionPoints.length > 0 ? (
+                                                <div>
+                                                    <div className="text-[11px] font-medium text-textSecondary">Execution</div>
+                                                    <ul className="mt-3 space-y-2">
+                                                        {executionPoints.map((p) => (
+                                                            <li key={p} className="flex items-start gap-2 text-small text-textSecondary">
+                                                                <Icon name="check_circle" className="mt-0.5 text-[18px] text-accent" />
+                                                                <span>{p}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            ) : (
+                                                <div>
+                                                    <div className="text-[11px] font-medium text-textSecondary">Strategy & Execution</div>
+                                                    <ul className="mt-3 space-y-2">
+                                                        {solutionPoints.map((p) => (
+                                                            <li key={p} className="flex items-start gap-2 text-small text-textSecondary">
+                                                                <Icon name="check_circle" className="mt-0.5 text-[18px] text-accent" />
+                                                                <span>{p}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
                                         </div>
 
                                         <div className="md:col-span-5 md:border-l md:border-border md:pl-6">
