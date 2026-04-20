@@ -26,9 +26,12 @@ export function ServiceCard({
   description,
   featured = false,
   badge,
-  ctaLabel = "Learn more →"
+  ctaLabel = "Learn more →",
+  showCta = true,
+  descriptionLines = 2
 }) {
   const reduceMotion = useReducedMotion();
+  const clampClass = descriptionLines === 1 ? "line-clamp-1" : descriptionLines === 2 ? "line-clamp-2" : "";
 
   return (
     <LazyMotion features={domAnimation}>
@@ -64,12 +67,14 @@ export function ServiceCard({
           </m.div>
 
           <div className="mt-4 text-body font-semibold text-textPrimary">{title}</div>
-          <div className="mt-2 text-small text-textSecondary">{description}</div>
+          <div className={cx("mt-2 text-small text-textSecondary", clampClass)}>{description}</div>
 
-          <div className="mt-5 inline-flex items-center gap-2 text-small font-medium text-accent">
-            <span>{ctaLabel}</span>
-            <Icon name="arrow_forward" className="text-[18px]" />
-          </div>
+          {showCta ? (
+            <div className="mt-5 inline-flex items-center gap-2 text-small font-medium text-accent">
+              <span>{ctaLabel}</span>
+              <Icon name="arrow_forward" className="text-[18px]" />
+            </div>
+          ) : null}
         </m.div>
       </Link>
     </LazyMotion>
