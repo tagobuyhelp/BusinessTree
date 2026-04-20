@@ -43,10 +43,7 @@ const themeInitScript = `
 
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`
-  },
+  title: siteConfig.name,
   description: siteConfig.description,
   keywords: [
     "Digital Marketing Agency",
@@ -101,7 +98,10 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([organizationJsonLd(), websiteJsonLd()])
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [organizationJsonLd(), websiteJsonLd()]
+            })
           }}
         />
       </head>
