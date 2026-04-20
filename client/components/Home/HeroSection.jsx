@@ -52,10 +52,10 @@ export function HeroSection() {
           </div>
 
           <SectionInner>
-            <div className="py-10 sm:py-14">
-              <div className="grid items-center gap-10 lg:grid-cols-12">
+            <div className="py-8 sm:py-14">
+              <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
                 <m.div
-                  className="space-y-6 lg:col-span-7"
+                  className="space-y-5 sm:space-y-6 lg:col-span-7"
                   initial={reduceMotion ? false : { opacity: 0, y: 14 }}
                   animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                   transition={reduceMotion ? undefined : { duration: 0.4, ease: "easeOut" }}
@@ -65,12 +65,12 @@ export function HeroSection() {
                     <span>Premium growth for modern teams</span>
                   </div>
 
-                  <h1 className="text-[2.1rem] font-bold leading-tight text-onPrimary sm:text-h1">
+                  <h1 className="text-[1.9rem] font-bold leading-tight text-onPrimary sm:text-h1">
                     Grow faster with a strategy-led digital team built for{" "}
                     <span className="text-onPrimary">measurable</span> results.
                   </h1>
 
-                  <p className="max-w-xl text-[1.02rem] leading-relaxed text-onPrimaryMuted sm:text-bodyLg">
+                  <p className="max-w-xl text-[0.98rem] leading-relaxed text-onPrimaryMuted sm:text-bodyLg">
                     We help SaaS and agencies improve acquisition, conversion, and retention through high-performance
                     web experiences and ROI-focused marketing.
                   </p>
@@ -80,7 +80,7 @@ export function HeroSection() {
                       label="Get Free Strategy"
                       icon="bolt"
                       fullWidth
-                      className="bg-headerBg text-onPrimary hover:bg-secondary hover:text-onAccent active:bg-accent"
+                      className="bg-white text-black hover:bg-secondary hover:text-onAccent active:bg-accent"
                     />
                     <Button
                       size="lg"
@@ -94,24 +94,24 @@ export function HeroSection() {
                     </Button>
                   </div>
 
-                  <div className="flex flex-wrap gap-x-5 gap-y-3 text-small text-onPrimarySoft">
+                  <div className=" flex-wrap gap-x-5 gap-y-3 text-[12px] text-onPrimarySoft sm:flex">
                     <div className="inline-flex items-center gap-2">
-                      <Icon name="bolt" className="text-[18px] text-onPrimaryMuted" />
+                      <Icon name="bolt" className="text-[12px] text-onPrimaryMuted" />
                       <span>Fast execution</span>
                     </div>
                     <div className="inline-flex items-center gap-2">
-                      <Icon name="insights" className="text-[18px] text-onPrimaryMuted" />
+                      <Icon name="insights" className="text-[12px] text-onPrimaryMuted" />
                       <span>Clear reporting</span>
                     </div>
                     <div className="inline-flex items-center gap-2">
-                      <Icon name="shield" className="text-[18px] text-onPrimaryMuted" />
+                      <Icon name="shield" className="text-[12px] text-onPrimaryMuted" />
                       <span>Conversion-first UX</span>
                     </div>
                   </div>
                 </m.div>
 
                 <m.div
-                  className="lg:col-span-5"
+                  className=" sm:block lg:col-span-5"
                   initial={reduceMotion ? false : { opacity: 0, y: 14 }}
                   animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                   transition={reduceMotion ? undefined : { duration: 0.45, ease: "easeOut", delay: 0.05 }}
