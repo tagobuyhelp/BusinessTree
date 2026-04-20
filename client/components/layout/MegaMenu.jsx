@@ -339,6 +339,7 @@ export const MegaMenu = memo(
     {
       id = "services-mega-menu",
       isOpen,
+      topOffset = "80px",
       onClose,
       onMouseEnter,
       onMouseLeave,
@@ -348,6 +349,7 @@ export const MegaMenu = memo(
   ) {
     const internalRef = useRef(null);
     const firstCategoryRef = useRef(null);
+    const wasOpenRef = useRef(false);
     const reduceMotion = useReducedMotion();
     const groups = useMemo(() => DEFAULT_GROUPS, []);
     const [activeGroup, setActiveGroup] = useState(groups[0].id);
@@ -376,10 +378,15 @@ export const MegaMenu = memo(
       return () => window.removeEventListener("keydown", onKeyDown);
     }, [isOpen, onClose]);
 
-    // Reset active tab when menu closes
     useEffect(() => {
-      if (!isOpen) setActiveGroup(groups[0].id);
-    }, [isOpen, groups]);
+      if (isOpen) {
+        wasOpenRef.current = true;
+        return;
+      }
+      if (!wasOpenRef.current) return;
+      wasOpenRef.current = false;
+      setActiveGroup((prev) => (prev === groups[0].id ? prev : groups[0].id));
+    }, [groups, isOpen]);
 
     useEffect(() => {
       if (!isOpen) return;
@@ -434,7 +441,8 @@ export const MegaMenu = memo(
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
               onBlur={handleBlur}
-              className="fixed left-0 right-0 top-[80px] z-50"
+              className="fixed left-0 right-0 z-50"
+              style={{ top: topOffset }}
               variants={reduceMotion ? {} : panelVariants}
               initial={reduceMotion ? false : "hidden"}
               animate={reduceMotion ? undefined : "show"}

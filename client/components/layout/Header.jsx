@@ -39,12 +39,25 @@ export function Header() {
 
   const navItems = useMemo(
     () => [
-      { href: "/", label: "Home", icon: "home" },
-      { href: "/case-studies", label: "Case Studies", icon: "workspace_premium" },
-      { href: "/about", label: "About", icon: "info" },
+      { href: "/case-studies", label: "Case Studies", icon: "stacked_line_chart" },
       { href: "/blog", label: "Blog", icon: "article" },
+      { href: "/about", label: "About", icon: "info" },
       { href: "/contact", label: "Contact", icon: "mail" }
     ],
+    []
+  );
+
+  const megaTopOffset = useMemo(() => (isScrolled ? "72px" : "116px"), [isScrolled]);
+
+  const linkBase = useMemo(
+    () =>
+      cx(
+        "group relative inline-flex items-center gap-2 rounded-md px-4 py-2.5 text-body font-medium text-onPrimary",
+        "hover:bg-headerHover active:bg-headerHover",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary",
+        "after:content-[''] after:absolute after:bottom-1.5 after:left-4 after:right-4 after:h-[2px] after:origin-left after:scale-x-0 after:rounded-full after:bg-white/80 after:transition-transform after:duration-150",
+        "hover:after:scale-x-100"
+      ),
     []
   );
 
@@ -105,7 +118,7 @@ export function Header() {
         initial={reduceMotion ? false : { y: -12, opacity: 0 }}
         animate={reduceMotion ? undefined : { y: 0, opacity: 1 }}
         transition={reduceMotion ? undefined : { type: "spring", stiffness: 520, damping: 46 }}
-        className={cx("sticky top-0 z-50 w-full")}
+        className={cx("sticky top-0 z-50 w-full", isScrolled && "shadow-lg shadow-black/[0.10]")}
       >
         <div className={cx("absolute inset-0 pointer-events-none backdrop-blur")}>
           <m.div
@@ -125,8 +138,67 @@ export function Header() {
           />
         </div>
 
+        <m.div
+          className="relative hidden overflow-hidden border-b border-borderOnBrand bg-secondary md:block"
+          initial={false}
+          animate={{ height: isScrolled ? 0 : 36, opacity: isScrolled ? 0 : 1 }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.2, ease: "easeOut" }}
+          aria-hidden={isScrolled ? "true" : "false"}
+        >
+          <div className="mx-auto flex h-9 max-w-7xl items-center justify-between gap-4 px-4 text-[12.5px] text-onPrimary sm:px-6 lg:px-8">
+            <div className="flex min-w-0 items-center gap-3">
+              <div className="inline-flex min-w-0 items-center gap-2">
+                <Icon name="verified" className="text-[16px] text-onPrimary" />
+                <span className="truncate text-onPrimaryMuted">Trusted by 100+ businesses</span>
+              </div>
+              <span className="hidden text-onPrimaryMuted/60 lg:inline">•</span>
+              <Link
+                href="/contact"
+                className={cx(
+                  "hidden items-center gap-2 rounded-md px-2 py-1 font-medium text-onPrimary lg:inline-flex",
+                  "hover:bg-headerHover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
+                )}
+              >
+                <Icon name="bolt" className="text-[16px] text-onPrimary" />
+                <span>Free Strategy Session Available</span>
+              </Link>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <a
+                href="mailto:hello@businesstree.com"
+                className={cx(
+                  "hidden items-center gap-2 rounded-md px-2 py-1 text-onPrimaryMuted lg:inline-flex",
+                  "hover:text-onPrimary hover:bg-headerHover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
+                )}
+                aria-label="Email Business Tree"
+              >
+                <Icon name="mail" className="text-[16px]" />
+                <span>hello@businesstree.com</span>
+              </a>
+              <a
+                href="tel:+10000000000"
+                className={cx(
+                  "inline-flex items-center gap-2 rounded-md px-2 py-1 text-onPrimaryMuted",
+                  "hover:text-onPrimary hover:bg-headerHover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
+                )}
+                aria-label="Call Business Tree"
+              >
+                <Icon name="call" className="text-[16px]" />
+                <span className="hidden sm:inline">+1 (000) 000-0000</span>
+              </a>
+            </div>
+          </div>
+        </m.div>
+
         <nav aria-label="Primary" className="relative">
-          <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <m.div
+            className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
+            initial={false}
+            animate={{ height: isScrolled ? 72 : 80 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.2, ease: "easeOut" }}
+            style={{ height: isScrolled ? 72 : 80 }}
+          >
             <Link
               href="/"
               className={cx(
@@ -141,24 +213,14 @@ export function Header() {
                 width={220}
                 height={72}
                 priority
-                className="block h-10 w-auto"
+                className={cx("block w-auto", isScrolled ? "h-9" : "h-10")}
               />
-              <span className="font-heading text-h4 text-onPrimary">Business Tree</span>
+              <span className={cx("font-heading text-onPrimary", isScrolled ? "text-[18px]" : "text-h4")}>
+                Business Tree
+              </span>
             </Link>
 
             <div className="hidden items-center gap-1 lg:flex">
-              <Link
-                href="/"
-                className={cx(
-                  "inline-flex items-center gap-2 rounded-md px-4 py-2.5 text-body font-medium text-onPrimary",
-                  "hover:bg-headerHover",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
-                )}
-              >
-                <Icon name="home" className="text-[20px] text-onPrimaryMuted" />
-                <span>Home</span>
-              </Link>
-
               <div
                 ref={servicesWrapperRef}
                 className="relative"
@@ -168,9 +230,9 @@ export function Header() {
                 <button
                   type="button"
                   className={cx(
-                    "inline-flex items-center gap-2 rounded-md px-4 py-2.5 text-body font-medium text-onPrimary",
-                    "hover:bg-headerHover",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+                    linkBase,
+                    servicesOpen && "after:scale-x-100 after:bg-white",
+                    "font-semibold"
                   )}
                   aria-haspopup="menu"
                   aria-expanded={servicesOpen}
@@ -189,6 +251,7 @@ export function Header() {
                 <MegaMenu
                   id="services-mega-menu"
                   isOpen={servicesOpen}
+                  topOffset={megaTopOffset}
                   onClose={closeServicesNow}
                   onMouseEnter={scheduleOpen}
                   onMouseLeave={scheduleClose}
@@ -196,49 +259,47 @@ export function Header() {
                 />
               </div>
 
-              {navItems
-                .filter((i) => i.href !== "/")
-                .map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cx(
-                      "inline-flex items-center gap-2 rounded-md px-4 py-2.5 text-body font-medium text-onPrimary",
-                      "hover:bg-headerHover",
-                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
-                    )}
-                  >
-                    <Icon name={item.icon} className="text-[20px] text-onPrimaryMuted" />
-                    <span>{item.label}</span>
-                  </Link>
-                ))}
+              {navItems.map((item) => (
+                <Link key={item.href} href={item.href} className={linkBase}>
+                  <Icon name={item.icon} className="text-[20px] text-onPrimaryMuted" />
+                  <span>{item.label}</span>
+                </Link>
+              ))}
             </div>
 
             <div className="hidden items-center gap-3 lg:flex">
-              <m.div
-                animate={
-                  reduceMotion
-                    ? undefined
-                    : {
-                        scale: [1, 1.02, 1]
-                      }
-                }
-                transition={
-                  reduceMotion
-                    ? undefined
-                    : {
-                        duration: 2.2,
-                        repeat: Infinity,
-                        repeatType: "mirror",
-                        ease: "easeInOut"
-                      }
-                }
+              <a
+                href="tel:+10000000000"
+                className={cx(
+                  "inline-flex h-11 w-11 items-center justify-center rounded-md",
+                  "border border-borderOnBrand bg-transparent text-onPrimary hover:bg-headerHover active:bg-headerHover",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+                )}
+                aria-label="Call Business Tree"
               >
-                <CTAButton
-                  label="Get Free Strategy"
-                  className="bg-transparent border border-white border-solid text-white hover:bg-secondary active:bg-accent"
-                />
-              </m.div>
+                <Icon name="call" className="text-[22px] text-onPrimary" />
+              </a>
+              <a
+                href="https://wa.me/10000000000?text=Hi%20Business%20Tree%20%E2%80%94%20I%27d%20like%20a%20free%20strategy%20call."
+                target="_blank"
+                rel="noreferrer"
+                className={cx(
+                  "inline-flex h-11 w-11 items-center justify-center rounded-md",
+                  "border border-borderOnBrand bg-transparent text-onPrimary hover:bg-headerHover active:bg-headerHover",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+                )}
+                aria-label="Message Business Tree on WhatsApp"
+              >
+                <Icon name="chat" className="text-[22px] text-onPrimary" />
+              </a>
+
+              <CTAButton
+                label="Get Free Strategy"
+                className={cx(
+                  "!bg-white !text-black hover:!bg-white active:!bg-white",
+                  "shadow-xl ring-1 ring-white/15 hover:ring-white/25"
+                )}
+              />
             </div>
 
             <div className="flex items-center gap-2 lg:hidden">
@@ -256,7 +317,7 @@ export function Header() {
                 <Icon name="menu" className="text-[24px] text-onPrimary" />
               </button>
             </div>
-          </div>
+          </m.div>
         </nav>
       </m.header>
 
