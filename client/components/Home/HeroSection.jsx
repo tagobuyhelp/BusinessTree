@@ -52,8 +52,8 @@ export function HeroSection() {
           </div>
 
           <SectionInner>
-            <div className="py-8 sm:py-14">
-              <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+            <div className="py-8 md:py-12 lg:py-14">
+              <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
                 <m.div
                   className="space-y-5 sm:space-y-6 lg:col-span-7"
                   initial={reduceMotion ? false : { opacity: 0, y: 14 }}
@@ -65,7 +65,7 @@ export function HeroSection() {
                     <span>Premium growth for modern teams</span>
                   </div>
 
-                  <h1 className="text-[1.9rem] font-bold leading-tight text-onPrimary sm:text-h1">
+                  <h1 className="text-3xl font-bold leading-tight text-onPrimary md:text-4xl lg:text-h1">
                     Grow faster with a strategy-led digital team built for{" "}
                     <span className="text-onPrimary">measurable</span> results.
                   </h1>
@@ -75,7 +75,7 @@ export function HeroSection() {
                     web experiences and ROI-focused marketing.
                   </p>
 
-                  <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                     <CTAButton
                       label="Get Free Strategy"
                       icon="bolt"
@@ -94,7 +94,7 @@ export function HeroSection() {
                     </Button>
                   </div>
 
-                  <div className=" flex-wrap gap-x-5 gap-y-3 text-[12px] text-onPrimarySoft sm:flex">
+                  <div className="flex flex-wrap gap-x-5 gap-y-3 text-[12px] text-onPrimarySoft">
                     <div className="inline-flex items-center gap-2">
                       <Icon name="bolt" className="text-[12px] text-onPrimaryMuted" />
                       <span>Fast execution</span>
@@ -111,7 +111,7 @@ export function HeroSection() {
                 </m.div>
 
                 <m.div
-                  className=" sm:block lg:col-span-5"
+                  className="mx-auto w-full max-w-[92%] sm:max-w-md lg:col-span-5 lg:max-w-none"
                   initial={reduceMotion ? false : { opacity: 0, y: 14 }}
                   animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                   transition={reduceMotion ? undefined : { duration: 0.45, ease: "easeOut", delay: 0.05 }}

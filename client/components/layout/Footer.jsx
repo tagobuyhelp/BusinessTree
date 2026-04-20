@@ -55,13 +55,13 @@ export function Footer() {
         initial={reduceMotion ? false : { opacity: 0, y: 12 }}
         whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={reduceMotion ? undefined : { duration: 0.35, ease: "easeOut" }}
+        transition={reduceMotion ? undefined : { duration: 0.3, ease: "easeOut" }}
       >
         <div className="pointer-events-none absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-gradient-to-br from-secondary to-primary" />
         </div>
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 relative">
-          <div className="grid gap-10 md:grid-cols-4">
+        <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
             <div className="space-y-4 md:col-span-1">
               <Link href="/" className="inline-flex items-center gap-3">
                 <Image src="/images/logos/logo2iconwhite.png" alt="Business Tree" width={44} height={44} />
@@ -78,7 +78,7 @@ export function Footer() {
                   <Link
                     href="/contact"
                     className={cx(
-                      "inline-flex items-center gap-2 rounded-md border border-borderOnBrand bg-transparent px-3 py-2 text-small font-medium text-onPrimary",
+                      "inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-md border border-borderOnBrand bg-transparent px-3 py-2 text-small font-medium text-onPrimary sm:w-auto",
                       "hover:bg-headerHover",
                       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                     )}
@@ -191,7 +191,7 @@ export function Footer() {
                       type="button"
                       onClick={() => toggle(item.id)}
                       className={cx(
-                        "flex w-full items-center justify-between gap-3 px-4 py-3 text-left",
+                        "flex min-h-[44px] w-full items-center justify-between gap-3 px-4 py-3 text-left",
                         "text-small font-medium text-onPrimary",
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                       )}
@@ -217,7 +217,7 @@ export function Footer() {
                           <ul className="space-y-2 text-small">
                             {services.map((s) => (
                               <li key={s.href}>
-                                <Link className="inline-flex items-center gap-2 text-onPrimaryMuted hover:text-onPrimary" href={s.href}>
+                                <Link className="inline-flex min-h-[44px] items-center gap-2 text-onPrimaryMuted hover:text-onPrimary" href={s.href}>
                                   <Icon name={s.icon} className="text-[18px] text-onPrimaryMuted" />
                                   <span>{s.label}</span>
                                 </Link>
@@ -230,7 +230,7 @@ export function Footer() {
                           <ul className="space-y-2 text-small">
                             {company.map((c) => (
                               <li key={c.href}>
-                                <Link className="inline-flex items-center gap-2 text-onPrimaryMuted hover:text-onPrimary" href={c.href}>
+                                <Link className="inline-flex min-h-[44px] items-center gap-2 text-onPrimaryMuted hover:text-onPrimary" href={c.href}>
                                   <Icon name={c.icon} className="text-[18px] text-onPrimaryMuted" />
                                   <span>{c.label}</span>
                                 </Link>

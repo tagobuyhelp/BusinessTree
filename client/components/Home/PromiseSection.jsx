@@ -98,14 +98,14 @@ export function PromiseSection() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Section tone="tint" className="border-y border-border bg-tint py-12 sm:py-16">
+      <Section tone="tint" className="border-y border-border bg-tint py-8 sm:py-10">
         <SectionInner>
           <m.div
             initial={reduceMotion ? false : { opacity: 0, y: 14 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={reduceMotion ? undefined : { duration: 0.32, ease: "easeOut" }}
-            className="space-y-8"
+            className="space-y-6"
           >
             <div className="max-w-2xl">
               <h2 className="text-h2">Our Promise</h2>
@@ -115,7 +115,7 @@ export function PromiseSection() {
             </div>
 
             <m.div
-              className="grid gap-4 md:grid-cols-2"
+              className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3"
               variants={listVariants}
               initial={reduceMotion ? false : "hidden"}
               whileInView={reduceMotion ? undefined : "show"}
@@ -125,14 +125,14 @@ export function PromiseSection() {
                 <m.div
                   key={p.title}
                   variants={itemVariants}
-                  className="flex items-start gap-3 rounded-xl border border-border bg-surface/90 p-4 shadow-sm backdrop-blur-sm"
+                  className="flex min-h-[44px] items-center gap-3 rounded-xl border border-border bg-surface/90 p-3.5 shadow-sm backdrop-blur-sm"
                 >
-                  <div className="mt-0.5 flex h-9 w-9 items-center justify-center rounded-lg bg-tint">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-tint">
                     <Icon name={p.icon} className="text-[20px] text-accent" />
                   </div>
-                  <div className="space-y-1">
+                  <div className="min-w-0">
                     <div className="text-small font-semibold text-textPrimary">{p.title}</div>
-                    <div className="text-small text-textSecondary">{p.description}</div>
+                    <div className="text-small text-textSecondary line-clamp-1">{p.description}</div>
                   </div>
                 </m.div>
               ))}

@@ -53,14 +53,14 @@ export function CoreServicesSection() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Section id="services" className="py-12 sm:py-16">
+      <Section id="services" className="py-8 sm:py-10">
         <SectionInner>
           <m.div
             initial={reduceMotion ? false : { opacity: 0, y: 14 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={reduceMotion ? undefined : { duration: 0.32, ease: "easeOut" }}
-            className="space-y-8"
+            className="space-y-6"
           >
             <div className="max-w-2xl">
               <h2 className="text-h2">Our Core Digital Services</h2>
@@ -70,7 +70,7 @@ export function CoreServicesSection() {
             </div>
 
             <m.div
-              className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+              className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3"
               variants={{
                 hidden: { opacity: 0 },
                 show: { opacity: 1, transition: { staggerChildren: 0.06 } }
@@ -94,6 +94,7 @@ export function CoreServicesSection() {
                     description={s.description}
                     descriptionLines={1}
                     showCta={false}
+                    compact
                   />
                 </m.div>
               ))}
@@ -104,4 +105,3 @@ export function CoreServicesSection() {
     </LazyMotion>
   );
 }
-

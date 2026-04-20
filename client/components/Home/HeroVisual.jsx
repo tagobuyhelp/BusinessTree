@@ -34,19 +34,19 @@ export function HeroVisual({ parallaxY = 0 }) {
   return (
     <LazyMotion features={domAnimation}>
       <m.div
-        className="relative mx-auto w-full max-w-md lg:max-w-none"
+        className="relative mx-auto w-full max-w-[92%] sm:max-w-md lg:max-w-none"
         initial={reduceMotion ? false : "hidden"}
         animate={reduceMotion ? undefined : "show"}
         variants={container}
       >
         <div className="pointer-events-none absolute inset-0 -z-10 opacity-30">
-          <m.div
+          <div
             className="absolute -left-14 -top-12 h-52 w-52 rounded-full bg-accent blur-3xl"
             style={{ y: reduceMotion ? 0 : parallaxY }}
           />
-          <m.div
+          <div
             className="absolute -bottom-16 -right-14 h-64 w-64 rounded-full bg-secondary blur-3xl"
-            style={{ y: reduceMotion ? 0 : parallaxY * 1.2 }}
+            style={{ y: reduceMotion ? 0 : parallaxY * 1.1 }}
           />
         </div>
 
@@ -56,7 +56,7 @@ export function HeroVisual({ parallaxY = 0 }) {
             "relative overflow-hidden rounded-2xl border border-borderOnBrand bg-headerBg",
             "shadow-xl"
           )}
-          style={{ y: reduceMotion ? 0 : parallaxY * 0.75 }}
+          style={{ y: reduceMotion ? 0 : parallaxY * 0.7 }}
         >
           <div className="pointer-events-none absolute inset-0 opacity-20">
             <div className="absolute inset-0 bg-gradient-to-br from-accent to-secondary" />
@@ -98,7 +98,7 @@ export function HeroVisual({ parallaxY = 0 }) {
                     style={{ height: `${h * 3}px` }}
                     initial={reduceMotion ? false : { scaleY: 0.6, opacity: 0 }}
                     animate={reduceMotion ? undefined : { scaleY: 1, opacity: 1 }}
-                    transition={reduceMotion ? undefined : { duration: 0.5, delay: 0.2 + idx * 0.02 }}
+                    transition={reduceMotion ? undefined : { duration: 0.35, delay: 0.12 + idx * 0.015 }}
                   />
                 ))}
               </div>
@@ -109,17 +109,6 @@ export function HeroVisual({ parallaxY = 0 }) {
         <m.div
           variants={item}
           className="absolute -left-4 top-10 hidden w-[210px] rounded-xl border border-borderOnBrand bg-headerBg p-4 shadow-lg sm:block"
-          style={{ y: reduceMotion ? 0 : parallaxY * 1.1 }}
-          animate={
-            reduceMotion
-              ? undefined
-              : {
-                  y: [0, -10, 0]
-                }
-          }
-          transition={
-            reduceMotion ? undefined : { duration: 4.2, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }
-          }
         >
           <div className="flex items-start gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/40">
@@ -135,17 +124,6 @@ export function HeroVisual({ parallaxY = 0 }) {
         <m.div
           variants={item}
           className="absolute -right-3 bottom-10 hidden w-[220px] rounded-xl border border-borderOnBrand bg-headerBg p-4 shadow-lg sm:block"
-          style={{ y: reduceMotion ? 0 : parallaxY * 1.25 }}
-          animate={
-            reduceMotion
-              ? undefined
-              : {
-                  y: [0, -12, 0]
-                }
-          }
-          transition={
-            reduceMotion ? undefined : { duration: 4.8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }
-          }
         >
           <div className="flex items-start gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/40">
@@ -161,17 +139,6 @@ export function HeroVisual({ parallaxY = 0 }) {
         <m.div
           variants={item}
           className="absolute left-10 bottom-2 hidden w-[200px] rounded-xl border border-borderOnBrand bg-headerBg p-4 shadow-lg md:block"
-          style={{ y: reduceMotion ? 0 : parallaxY * 1.35 }}
-          animate={
-            reduceMotion
-              ? undefined
-              : {
-                  y: [0, -9, 0]
-                }
-          }
-          transition={
-            reduceMotion ? undefined : { duration: 5.1, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }
-          }
         >
           <div className="flex items-start gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/40">

@@ -87,14 +87,14 @@ export function CompactCaseStudiesSection() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Section id="case-studies" className="py-10 sm:py-12">
+      <Section id="case-studies" className="py-8 sm:py-10">
         <SectionInner>
           <m.div
             initial={reduceMotion ? false : { opacity: 0, y: 14 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={reduceMotion ? undefined : { duration: 0.32, ease: "easeOut" }}
-            className="space-y-6"
+            className="space-y-5"
           >
             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
               <div className="max-w-2xl">
@@ -106,7 +106,7 @@ export function CompactCaseStudiesSection() {
             </div>
 
             <m.div
-              className="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+              className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 md:mx-0 md:grid md:grid-cols-2 md:snap-none md:overflow-visible md:px-0 xl:grid-cols-3"
               variants={{
                 hidden: { opacity: 0 },
                 show: { opacity: 1, transition: { staggerChildren: 0.06 } }
@@ -118,7 +118,7 @@ export function CompactCaseStudiesSection() {
               {items.map((cs) => (
                 <m.div
                   key={cs.href}
-                  className="h-[260px]"
+                  className="min-w-[88%] snap-start md:min-w-0"
                   variants={{
                     hidden: { opacity: 0, y: 10 },
                     show: { opacity: 1, y: 0 }
@@ -142,7 +142,7 @@ export function CompactCaseStudiesSection() {
             </m.div>
 
             <div className="flex justify-center pt-2">
-              <Button variant="secondary" asChild>
+              <Button variant="secondary" asChild className="w-full sm:w-auto">
                 <Link href="/case-studies">View All Case Studies →</Link>
               </Button>
             </div>

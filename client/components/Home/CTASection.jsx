@@ -28,8 +28,8 @@ export function CTASection() {
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
-              transition={reduceMotion ? undefined : { duration: 0.35, ease: "easeOut" }}
-              className="relative py-14 text-center sm:py-20"
+              transition={reduceMotion ? undefined : { duration: 0.3, ease: "easeOut" }}
+              className="relative py-10 pb-16 text-center sm:py-16 sm:pb-20"
             >
               <h2 className="mx-auto max-w-3xl font-heading text-[2.1rem] font-bold leading-tight text-onPrimary sm:text-h1">
                 Ready to Scale Your Business Globally?
@@ -41,12 +41,8 @@ export function CTASection() {
 
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <m.div
-                  animate={reduceMotion ? undefined : { scale: [1, 1.03, 1] }}
-                  transition={
-                    reduceMotion
-                      ? undefined
-                      : { duration: 2.1, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }
-                  }
+                  animate={undefined}
+                  transition={undefined}
                   className="w-full sm:w-auto"
                 >
                   <CTAButton label="Get Free Strategy" fullWidth />
@@ -55,7 +51,7 @@ export function CTASection() {
                 <Link
                   href="/case-studies"
                   className={cx(
-                    "text-small font-medium text-onPrimary border px-4 py-2 border-onPrimary rounded-md hover:text-black",
+                    "inline-flex min-h-[44px] w-full items-center justify-center text-small font-medium text-onPrimary border px-4 py-2 border-onPrimary rounded-md hover:text-black sm:w-auto",
                     "hover:bg-onPrimary ",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                   )}

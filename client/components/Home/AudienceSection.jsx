@@ -71,14 +71,14 @@ export function AudienceSection() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Section tone="tint" className="py-12 sm:py-16">
+      <Section tone="tint" className="py-8 sm:py-10">
         <SectionInner>
           <m.div
             initial={reduceMotion ? false : { opacity: 0, y: 14 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={reduceMotion ? undefined : { duration: 0.32, ease: "easeOut" }}
-            className="space-y-8"
+            className="space-y-6"
           >
             <div className="max-w-2xl">
               <h2 className="text-h2">Who Our Services Are For</h2>
@@ -87,7 +87,7 @@ export function AudienceSection() {
               </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {audiences.map((audience, idx) => (
                 <m.div
                   key={audience.title}
@@ -97,9 +97,8 @@ export function AudienceSection() {
                   transition={
                     reduceMotion ? undefined : { duration: 0.28, ease: "easeOut", delay: idx * 0.05 }
                   }
-                  whileHover={reduceMotion ? undefined : { y: -6, scale: 1.02 }}
                   whileTap={reduceMotion ? undefined : { scale: 0.99 }}
-                  className="group flex h-full flex-col rounded-xl border border-border bg-surface/80 p-5 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-lg"
+                  className="group flex min-h-[44px] h-full flex-col rounded-xl border border-border bg-surface/80 p-5 shadow-sm backdrop-blur-sm transition-shadow"
                 >
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-bg">
@@ -109,7 +108,7 @@ export function AudienceSection() {
                       {audience.title}
                     </div>
                   </div>
-                  <div className="mt-3 text-small text-textSecondary">
+                  <div className="mt-2 text-small text-textSecondary line-clamp-1">
                     {audience.description}
                   </div>
                 </m.div>

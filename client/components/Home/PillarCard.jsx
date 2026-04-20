@@ -26,17 +26,16 @@ export function PillarCard({ icon, title, description }) {
       <m.article
         tabIndex={0}
         className={cx(
-          "group relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface p-6",
+          "group relative flex min-h-[44px] h-full flex-col overflow-hidden rounded-xl border border-border bg-surface p-5",
           "border-t-4 border-t-accent",
-          "shadow-sm transition-shadow hover:shadow-xl hover:ring-1 hover:ring-accent",
+          "shadow-sm transition-shadow",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
         )}
-        whileHover={reduceMotion ? undefined : { y: -8, scale: 1.03 }}
+        whileTap={reduceMotion ? undefined : { scale: 0.99 }}
         transition={reduceMotion ? undefined : { type: "spring", stiffness: 420, damping: 32 }}
       >
         <m.div
           className="relative flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-tint"
-          whileHover={reduceMotion ? undefined : { rotate: 6, scale: 1.06 }}
           transition={reduceMotion ? undefined : { type: "spring", stiffness: 420, damping: 26 }}
         >
           <Icon name={icon} className="text-[24px] text-accent" />

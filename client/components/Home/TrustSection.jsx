@@ -38,14 +38,14 @@ export function TrustSection() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Section tone="surface" className="py-12 sm:py-16">
+      <Section tone="surface" className="py-8 sm:py-10">
         <SectionInner>
           <m.div
             initial={reduceMotion ? false : { opacity: 0, y: 14 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={reduceMotion ? undefined : { duration: 0.35, ease: "easeOut" }}
-            className="space-y-10"
+            className="space-y-6"
           >
             <div className="flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:text-left">
               <div className="flex items-center justify-center">
@@ -70,7 +70,7 @@ export function TrustSection() {
               </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
               {stats.map((s) => (
                 <m.div
                   key={s.label}

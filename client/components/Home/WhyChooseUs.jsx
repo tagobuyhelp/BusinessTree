@@ -44,7 +44,7 @@ export function WhyChooseUs() {
       <Section
         id="why-us"
         tone="tint"
-        className="border-y border-border bg-gradient-to-b from-tint to-surface py-12 sm:py-16"
+        className="border-y border-border bg-gradient-to-b from-tint to-surface py-8 sm:py-10"
       >
         <SectionInner>
           <m.div
@@ -52,19 +52,19 @@ export function WhyChooseUs() {
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={reduceMotion ? undefined : { duration: 0.35, ease: "easeOut" }}
-            className="space-y-8"
+            className="space-y-6"
           >
             <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm sm:p-8">
               <div className="max-w-2xl border-l-4 border-l-accent pl-4">
                 <h2 className="text-h2">Why Business Tree Is Different</h2>
-                <p className="mt-3 text-body text-textSecondary">
+                <p className="mt-3 text-body text-textSecondary line-clamp-2">
                   We don’t just market your business — we build systems that drive real growth.
                 </p>
               </div>
             </div>
 
             <m.div
-              className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
+              className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4"
               variants={{
                 hidden: { opacity: 0 },
                 show: { opacity: 1, transition: { staggerChildren: 0.06 } }

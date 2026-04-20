@@ -22,7 +22,7 @@ function Icon({ name, className, "aria-hidden": ariaHidden = true }) {
 
 function WelcomeVisual({ reduceMotion }) {
   return (
-    <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+    <div className="relative mx-auto w-full max-w-[85%] sm:max-w-md lg:max-w-none">
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-35">
         <div className="absolute -left-10 -top-10 h-56 w-56 rounded-full bg-accent blur-3xl" />
         <div className="absolute -bottom-14 -right-10 h-64 w-64 rounded-full bg-secondary blur-3xl" />
@@ -115,9 +115,9 @@ export function WelcomeSection() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Section tone="tint" className="py-12 sm:py-16">
+      <Section tone="tint" className="py-8 sm:py-10">
         <SectionInner>
-          <div className="grid items-center gap-10 lg:grid-cols-12">
+          <div className="grid items-center gap-6 lg:grid-cols-12">
             <m.div
               className="space-y-6 lg:col-span-6"
               initial={reduceMotion ? false : { opacity: 0, x: -14 }}
@@ -132,18 +132,16 @@ export function WelcomeSection() {
                 </h2>
               </div>
 
-              <p className="max-w-2xl text-body text-textSecondary">
-                Businesses don’t fail because of bad ideas. They fail because execution is scattered—no clear strategy,
-                no consistent system, and no measurable path to growth.
+              <p className="max-w-2xl text-body text-textSecondary line-clamp-2">
+                Businesses fail when execution is scattered, not because the idea is weak.
               </p>
 
-              <p className="max-w-2xl text-body text-textSecondary">
-                Today’s market is digital chaos: algorithms change, attention shifts, and tactics stop working overnight.
-                Without a system, you’re reacting instead of scaling.
+              <p className="max-w-2xl text-body text-textSecondary line-clamp-2">
+                We build systems that keep growth consistent as channels and algorithms change.
               </p>
 
               <m.div
-                className="grid gap-3 sm:grid-cols-2"
+                className="grid grid-cols-2 gap-3"
                 variants={{
                   hidden: { opacity: 0 },
                   show: { opacity: 1, transition: { staggerChildren: 0.05 } }
@@ -185,4 +183,3 @@ export function WelcomeSection() {
     </LazyMotion>
   );
 }
-

@@ -28,7 +28,8 @@ export function ServiceCard({
   badge,
   ctaLabel = "Learn more →",
   showCta = true,
-  descriptionLines = 2
+  descriptionLines = 2,
+  compact = false
 }) {
   const reduceMotion = useReducedMotion();
   const clampClass = descriptionLines === 1 ? "line-clamp-1" : descriptionLines === 2 ? "line-clamp-2" : "";
@@ -45,10 +46,11 @@ export function ServiceCard({
       >
         <m.div
           className={cx(
-            "relative flex h-full flex-col rounded-xl border border-border bg-surface p-6",
+            "relative flex h-full rounded-xl border border-border bg-surface",
+            compact ? "items-center gap-3 p-4 lg:flex-col lg:items-start lg:p-6" : "flex-col p-6",
             featured && "ring-1 ring-accent"
           )}
-          whileHover={reduceMotion ? undefined : { y: -6, scale: 1.02 }}
+          whileHover={reduceMotion || compact ? undefined : { y: -6, scale: 1.02 }}
           whileTap={reduceMotion ? undefined : { scale: 0.99 }}
           transition={reduceMotion ? undefined : { type: "spring", stiffness: 420, damping: 34 }}
         >
@@ -60,17 +62,21 @@ export function ServiceCard({
 
           <m.div
             className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-bg"
-            whileHover={reduceMotion ? undefined : { rotate: featured ? 6 : 4, scale: 1.05 }}
+            whileHover={reduceMotion || compact ? undefined : { rotate: featured ? 6 : 4, scale: 1.05 }}
             transition={reduceMotion ? undefined : { type: "spring", stiffness: 420, damping: 26 }}
           >
             <Icon name={icon} className="text-[24px] text-accent" />
           </m.div>
 
-          <div className="mt-4 text-body font-semibold text-textPrimary">{title}</div>
-          <div className={cx("mt-2 text-small text-textSecondary", clampClass)}>{description}</div>
+          <div className={cx(compact ? "min-w-0 flex-1 lg:w-full lg:flex-none" : "")}>
+            <div className={cx("text-body font-semibold text-textPrimary", compact ? "lg:mt-4" : "mt-4")}>{title}</div>
+            <div className={cx("text-small text-textSecondary", clampClass, compact ? "mt-1 lg:mt-2" : "mt-2")}>
+              {description}
+            </div>
+          </div>
 
           {showCta ? (
-            <div className="mt-5 inline-flex items-center gap-2 text-small font-medium text-accent">
+            <div className={cx("inline-flex items-center gap-2 text-small font-medium text-accent", compact ? "ml-auto lg:ml-0 lg:mt-5" : "mt-5")}>
               <span>{ctaLabel}</span>
               <Icon name="arrow_forward" className="text-[18px]" />
             </div>

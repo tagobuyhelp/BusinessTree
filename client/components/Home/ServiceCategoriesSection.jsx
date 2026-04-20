@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 
@@ -10,10 +10,12 @@ import { CategoryBlock } from "./CategoryBlock";
 
 export function ServiceCategoriesSection() {
   const reduceMotion = useReducedMotion();
+  const [openId, setOpenId] = useState("digital-marketing");
 
   const categories = useMemo(
     () => [
       {
+        id: "digital-marketing",
         title: "Digital Marketing Services",
         icon: "insights",
         description:
@@ -22,6 +24,7 @@ export function ServiceCategoriesSection() {
         ctaLabel: "Explore Services"
       },
       {
+        id: "seo",
         title: "SEO (Local + Global)",
         icon: "trending_up",
         description:
@@ -30,6 +33,7 @@ export function ServiceCategoriesSection() {
         ctaLabel: "Explore SEO"
       },
       {
+        id: "performance",
         title: "Performance Marketing (Meta + Google Ads)",
         icon: "campaign",
         description:
@@ -38,6 +42,7 @@ export function ServiceCategoriesSection() {
         ctaLabel: "Explore Ads"
       },
       {
+        id: "development",
         title: "Web Development (MERN/MEAN/React/Node.js)",
         icon: "code",
         description:
@@ -46,6 +51,7 @@ export function ServiceCategoriesSection() {
         ctaLabel: "Explore Development"
       },
       {
+        id: "youtube",
         title: "YouTube SEO & Creator Growth",
         icon: "smart_display",
         description:
@@ -54,6 +60,7 @@ export function ServiceCategoriesSection() {
         ctaLabel: "Explore YouTube"
       },
       {
+        id: "social",
         title: "Social Media Management",
         icon: "public",
         description:
@@ -62,6 +69,7 @@ export function ServiceCategoriesSection() {
         ctaLabel: "Explore Social"
       },
       {
+        id: "linkedin",
         title: "LinkedIn Marketing & CEO Personal Branding",
         icon: "badge",
         description:
@@ -70,6 +78,7 @@ export function ServiceCategoriesSection() {
         ctaLabel: "Explore LinkedIn"
       },
       {
+        id: "influencer",
         title: "Influencer Marketing Services",
         icon: "groups",
         description:
@@ -78,6 +87,7 @@ export function ServiceCategoriesSection() {
         ctaLabel: "Explore Influencers"
       },
       {
+        id: "pr",
         title: "PR & Brand Authority Services",
         icon: "workspace_premium",
         description: [
@@ -93,14 +103,14 @@ export function ServiceCategoriesSection() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Section id="services" tone="tint" className="py-12 sm:py-16">
+      <Section id="services" tone="tint" className="py-8 sm:py-10">
         <SectionInner>
           <m.div
             initial={reduceMotion ? false : { opacity: 0, y: 14 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={reduceMotion ? undefined : { duration: 0.32, ease: "easeOut" }}
-            className="space-y-8"
+            className="space-y-6"
           >
             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
               <div className="max-w-2xl">
@@ -109,15 +119,54 @@ export function ServiceCategoriesSection() {
                   Comprehensive solutions covering every stage of your business growth.
                 </p>
               </div>
-              <Button variant="secondary" asChild>
+              <Button variant="secondary" asChild className="w-full sm:w-auto">
                 <Link href="/services">Explore Full Services →</Link>
               </Button>
             </div>
 
-            <div className="grid gap-6 lg:grid-cols-2">
+            <div className="space-y-3 lg:hidden">
+              {categories.map((c) => {
+                const expanded = openId === c.id;
+                return (
+                  <div key={c.id} className="overflow-hidden rounded-xl border border-border bg-surface">
+                    <button
+                      type="button"
+                      onClick={() => setOpenId(expanded ? "" : c.id)}
+                      className="flex min-h-[44px] w-full items-center justify-between gap-3 px-4 py-3 text-left"
+                      aria-expanded={expanded ? "true" : "false"}
+                      aria-controls={`service-category-${c.id}`}
+                    >
+                      <span className="text-small font-semibold text-textPrimary">{c.title}</span>
+                      <span className="material-symbols-outlined text-[20px] text-textSecondary" aria-hidden="true">
+                        {expanded ? "expand_less" : "expand_more"}
+                      </span>
+                    </button>
+                    <m.div
+                      id={`service-category-${c.id}`}
+                      initial={false}
+                      animate={expanded ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+                      transition={reduceMotion ? { duration: 0 } : { duration: 0.25, ease: "easeOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-4 pb-4">
+                        <CategoryBlock
+                          title={c.title}
+                          description={c.description}
+                          icon={c.icon}
+                          ctaHref={c.ctaHref}
+                          ctaLabel={c.ctaLabel}
+                        />
+                      </div>
+                    </m.div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="hidden grid-cols-1 gap-6 lg:grid lg:grid-cols-2">
               {categories.map((c) => (
                 <CategoryBlock
-                  key={c.title}
+                  key={`desktop-${c.id}`}
                   title={c.title}
                   description={c.description}
                   icon={c.icon}

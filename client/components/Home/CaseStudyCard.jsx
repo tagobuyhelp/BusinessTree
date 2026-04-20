@@ -90,10 +90,10 @@ export function CaseStudyCard({
         <m.article
           className={cx(
             "relative flex h-full flex-col rounded-xl border border-border bg-surface",
-            "shadow-sm transition-shadow hover:shadow-lg",
+            "shadow-sm transition-shadow",
             variant === "compact" ? "p-5" : "p-6"
           )}
-          whileHover={reduceMotion ? undefined : { y: -6, scale: 1.02 }}
+          whileTap={reduceMotion ? undefined : { scale: 0.99 }}
           transition={reduceMotion ? undefined : { type: "spring", stiffness: 420, damping: 34 }}
         >
           <div className="flex items-start justify-between gap-4">
