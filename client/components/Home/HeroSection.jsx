@@ -5,6 +5,7 @@ import Link from "next/link";
 import { LazyMotion, domAnimation, m, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 import { Button } from "../ui/Button";
+import { CTAButton } from "../ui/CTAButton";
 import { Section, SectionInner } from "../ui/Section";
 import { HeroVisual } from "./HeroVisual";
 
@@ -75,16 +76,12 @@ export function HeroSection() {
                   </p>
 
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <Button
-                      size="lg"
-                      asChild
-                      className="w-full bg-white text-black hover:bg-secondary hover:text-onAccent active:bg-accent"
-                    >
-                      <Link href="/contact" className="w-full justify-center">
-                        <Icon name="bolt" className="text-[20px]" />
-                        <span className="text-black hover:text-onAccent">Get Free Strategy</span>
-                      </Link>
-                    </Button>
+                    <CTAButton
+                      label="Get Free Strategy"
+                      icon="bolt"
+                      fullWidth
+                      className="bg-white text-black hover:bg-secondary hover:text-onAccent active:bg-accent"
+                    />
                     <Button
                       size="lg"
                       asChild

@@ -43,8 +43,8 @@ export const metadata = {
   title: "Business Tree",
   description: "Business Tree — design-token driven UI",
   icons: {
-    icon: "/images/logos/BusinessTreeLogoPng.png",
-    apple: "/images/logos/BusinessTreeLogoPng.png"
+    icon: "/images/logos/logo2icon.png",
+    apple: "/images/logos/logo2icon.png"
   }
 };
 

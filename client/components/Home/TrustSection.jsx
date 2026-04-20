@@ -80,7 +80,7 @@ export function TrustSection() {
                   transition={reduceMotion ? undefined : { duration: 0.28, ease: "easeOut" }}
                   className="rounded-xl border border-border bg-bg p-5"
                 >
-                  <div className="font-heading text-h3 font-bold text-textPrimary">
+                  <div className="font-body text-h3 font-bold text-textPrimary tabular-nums">
                     <StatsCounter value={s.value} suffix={s.suffix} />
                   </div>
                   <div className="mt-1 text-small text-textSecondary">{s.label}</div>

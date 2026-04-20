@@ -1,21 +1,30 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 
 import { Button } from "../ui/Button";
 import { Section, SectionInner } from "../ui/Section";
 import { CaseStudyCard } from "./CaseStudyCard";
 
+const CaseStudyModal = dynamic(
+  () => import("./CaseStudyModal").then((m) => m.CaseStudyModal),
+  { ssr: false }
+);
+
 export function CaseStudiesSection() {
   const reduceMotion = useReducedMotion();
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(null);
 
   const items = useMemo(
     () => [
       {
         href: "/case-studies/wellness-lifestyle",
         industry: "Wellness & Lifestyle",
+        title: "Wellness Growth System",
         problem: "Low visibility and high ad cost",
         solution: "SEO + performance funnel + website optimization",
         results: ["430% traffic growth", "3X ROAS", "57% lower CPA"]
@@ -37,6 +46,7 @@ export function CaseStudiesSection() {
       {
         href: "/case-studies/local-services",
         industry: "Local Services",
+        title: "Local Lead Engine",
         problem: "Inconsistent leads and poor local rankings",
         solution: "Local SEO + content system + conversion-first pages",
         results: ["5X qualified leads", "Top 3 map pack", "64% lower CPA"]
@@ -91,13 +101,24 @@ export function CaseStudiesSection() {
                   <CaseStudyCard
                     href={cs.href}
                     industry={cs.industry}
+                    title={cs.title}
                     problem={cs.problem}
                     solution={cs.solution}
                     results={cs.results}
+                    onOpen={() => {
+                      setActive(cs);
+                      setOpen(true);
+                    }}
                   />
                 </m.div>
               ))}
             </m.div>
+
+            <CaseStudyModal
+              open={open}
+              onClose={() => setOpen(false)}
+              caseStudy={active}
+            />
           </m.div>
         </SectionInner>
       </Section>

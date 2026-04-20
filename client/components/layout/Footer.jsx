@@ -40,7 +40,7 @@ export function Footer() {
             <div className="space-y-4">
               <Link href="/" className="inline-flex items-center gap-3">
                 <Image
-                  src="/images/logos/BusinessTreeLogoPng.png"
+                  src="/images/logos/logo2iconwhite.png"
                   alt="Business Tree"
                   width={44}
                   height={44}

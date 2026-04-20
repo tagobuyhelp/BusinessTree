@@ -55,7 +55,16 @@ function barsFromSeed(seed) {
   return bars;
 }
 
-export function CaseStudyCard({ href, industry, problem, solution, results, variant = "split" }) {
+export function CaseStudyCard({
+  href,
+  industry,
+  title,
+  problem,
+  solution,
+  results,
+  variant = "split",
+  onOpen
+}) {
   const reduceMotion = useReducedMotion();
   const { value: heroValue, label: heroLabel } = splitResult(results?.[0] || "");
   const bars = barsFromSeed(hashString(`${href}-${industry}`));
@@ -64,11 +73,19 @@ export function CaseStudyCard({ href, industry, problem, solution, results, vari
     <LazyMotion features={domAnimation}>
       <Link
         href={href}
+        onClick={(e) => {
+          if (!onOpen) return;
+          if (e.defaultPrevented) return;
+          if (e.button !== 0) return;
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          e.preventDefault();
+          onOpen?.();
+        }}
         className={cx(
           "group block h-full rounded-xl",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
         )}
-        aria-label={`Case study: ${industry}`}
+        aria-label={`Case study: ${title || industry}`}
       >
         <m.article
           className={cx(
@@ -94,7 +111,7 @@ export function CaseStudyCard({ href, industry, problem, solution, results, vari
             <div className="mt-4 flex h-full flex-col">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <div className="font-heading text-[2.15rem] font-bold leading-none text-secondary">
+                  <div className="font-body tabular-nums text-[2.15rem] font-bold leading-none text-secondary">
                     {heroValue}
                   </div>
                   <div className="mt-2 text-[11px] font-medium text-textSecondary line-clamp-1">
@@ -163,7 +180,7 @@ export function CaseStudyCard({ href, industry, problem, solution, results, vari
                     return (
                       <div key={r} className="rounded-lg border border-border bg-bg p-3">
                         <div className="flex items-start justify-between gap-3">
-                          <div className="font-heading text-h3 font-bold leading-none text-secondary">
+                          <div className="font-body tabular-nums text-h3 font-bold leading-none text-secondary">
                             {value}
                           </div>
                           <Icon name="check_circle" className="mt-0.5 text-[18px] text-accent" />

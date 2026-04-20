@@ -23,6 +23,10 @@
     text-rendering: optimizeLegibility;
   }
 
+  html {
+    scrollbar-gutter: stable;
+  }
+
   body.has-bottom-nav {
     padding-bottom: calc(env(safe-area-inset-bottom) + 76px);
   }

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 
-import { Button } from "../ui/Button";
+import { CTAButton } from "../ui/CTAButton";
 import { MegaMenu } from "./MegaMenu";
 import { MobileMenu } from "./MobileMenu";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
@@ -136,13 +136,14 @@ export function Header() {
               aria-label="Business Tree home"
             >
               <Image
-                src="/images/logos/BusinessTreeLogoHorizentalDarkBgSp.png"
+                src="/images/logos/logo2iconwhite.png"
                 alt="Business Tree"
                 width={220}
                 height={72}
                 priority
                 className="block h-10 w-auto"
               />
+              <span className="font-heading text-h4 text-onPrimary">Business Tree</span>
             </Link>
 
             <div className="hidden items-center gap-1 lg:flex">
@@ -233,20 +234,15 @@ export function Header() {
                       }
                 }
               >
-                <Button size="lg" asChild className="bg-transparent border border-white border-solid  text-white hover:bg-secondary active:bg-accent">
-                  <Link href="/contact" className="w-full justify-center">
-                    Get Free Strategy
-                  </Link>
-                </Button>
+                <CTAButton
+                  label="Get Free Strategy"
+                  className="bg-transparent border border-white border-solid text-white hover:bg-secondary active:bg-accent"
+                />
               </m.div>
             </div>
 
             <div className="flex items-center gap-2 lg:hidden">
-              <Button asChild className="bg-accent text-onAccent hover:bg-secondary active:bg-accent">
-                <Link href="/contact" className="w-full justify-center">
-                  Get Free Strategy
-                </Link>
-              </Button>
+              
               <button
                 type="button"
                 onClick={() => setMobileOpen(true)}

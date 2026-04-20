@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 
-import { Button } from "../ui/Button";
+import { CTAButton } from "../ui/CTAButton";
 import { Section, SectionInner } from "../ui/Section";
 
 function cx(...values) {
@@ -49,15 +49,7 @@ export function CTASection() {
                   }
                   className="w-full sm:w-auto"
                 >
-                  <Button
-                    size="lg"
-                    asChild
-                    className="w-full bg-accent text-onAccent hover:bg-secondary active:bg-accent"
-                  >
-                    <Link href="/contact" className="w-full justify-center">
-                      Get Free Strategy
-                    </Link>
-                  </Button>
+                  <CTAButton label="Get Free Strategy" fullWidth />
                 </m.div>
 
                 <Link

@@ -50,7 +50,7 @@ export function StatsCounter({
   return (
     <span
       ref={ref}
-      className={cx("tabular-nums", className)}
+      className={cx("font-body tabular-nums", className)}
       aria-label={ariaLabel || `${prefix}${target}${suffix}`}
     >
       {prefix}
