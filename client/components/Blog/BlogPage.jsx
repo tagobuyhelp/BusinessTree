@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 
 import { CTAButton } from "../ui/CTAButton";
@@ -142,8 +141,6 @@ function PostModal({ open, onClose, post }) {
 
 export function BlogPage() {
   const reduceMotion = useReducedMotion();
-  const router = useRouter();
-  const searchParams = useSearchParams();
 
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
@@ -262,19 +259,6 @@ export function BlogPage() {
     []
   );
 
-  useEffect(() => {
-    const slug = searchParams?.get?.("post");
-    if (!slug) {
-      setOpen(false);
-      return;
-    }
-
-    const match = posts.find((p) => p.slug === slug);
-    if (!match) return;
-    setActive((prev) => (prev?.slug === match.slug ? prev : match));
-    setOpen(true);
-  }, [posts, searchParams]);
-
   const featured = useMemo(() => posts.find((p) => p.featured) || posts[0], [posts]);
 
   const filtered = useMemo(() => {
@@ -293,19 +277,13 @@ export function BlogPage() {
     (post) => {
       setActive(post);
       setOpen(true);
-      const params = new URLSearchParams(searchParams?.toString());
-      params.set("post", post.slug);
-      router.replace(`/blog?${params.toString()}`, { scroll: false });
     },
-    [router, searchParams]
+    []
   );
 
   const closePost = useCallback(() => {
     setOpen(false);
-    const params = new URLSearchParams(searchParams?.toString());
-    params.delete("post");
-    router.replace(params.toString() ? `/blog?${params.toString()}` : "/blog", { scroll: false });
-  }, [router, searchParams]);
+  }, []);
 
   return (
     <LazyMotion features={domAnimation}>
