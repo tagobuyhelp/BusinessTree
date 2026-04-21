@@ -25,9 +25,30 @@ export function TeamSection() {
   const reduceMotion = useReducedMotion();
   const team = useMemo(
     () => [
-      { name: "Growth Strategist", role: "Strategy & Positioning", icon: "map" },
-      { name: "Performance Lead", role: "Ads & Analytics", icon: "campaign" },
-      { name: "Web Specialist", role: "UX & Development", icon: "code" }
+      {
+        name: "Growth Strategist",
+        role: "Strategy & Positioning",
+        icon: "map",
+        imageSrc:
+          "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=60",
+        imageAlt: "Strategy workshop"
+      },
+      {
+        name: "Performance Lead",
+        role: "Ads & Analytics",
+        icon: "campaign",
+        imageSrc:
+          "https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=800&q=60",
+        imageAlt: "Analytics review"
+      },
+      {
+        name: "Web Specialist",
+        role: "UX & Development",
+        icon: "code",
+        imageSrc:
+          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=60",
+        imageAlt: "Team building products"
+      }
     ],
     []
   );
@@ -70,8 +91,8 @@ export function TeamSection() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="relative h-12 w-12 overflow-hidden rounded-full border border-border bg-bg">
                       <Image
-                        src="/images/logos/BusinessTreeLogoPng.png"
-                        alt={t.name}
+                        src={t.imageSrc}
+                        alt={t.imageAlt}
                         fill
                         className="object-cover"
                         sizes="48px"
@@ -92,4 +113,3 @@ export function TeamSection() {
     </LazyMotion>
   );
 }
-

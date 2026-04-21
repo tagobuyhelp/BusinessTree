@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 
@@ -92,21 +93,44 @@ export function AboutHeroSection() {
                 </div>
 
                 <div className="lg:col-span-4">
-                  <div className="rounded-2xl border border-borderOnBrand bg-headerBg p-5 text-onPrimary shadow-sm">
-                    <div className="text-small font-semibold">What we believe</div>
-                    <div className="mt-3 space-y-2 text-small text-onPrimaryMuted">
-                      {[
-                        "Execution beats ideas when it’s consistent.",
-                        "Clarity beats complexity in every funnel.",
-                        "Growth is a system you can measure."
-                      ].map((t) => (
-                        <div key={t} className="flex items-start gap-2">
-                          <Icon name="check_circle" className="mt-0.5 text-[18px] text-onPrimary" />
-                          <span className="min-w-0">{t}</span>
+                  <div className="space-y-4">
+                    <div className="relative overflow-hidden rounded-2xl border border-borderOnBrand bg-headerBg shadow-sm">
+                      <div className="pointer-events-none absolute inset-0 opacity-20">
+                        <div className="absolute inset-0 bg-gradient-to-br from-accent to-secondary" />
+                      </div>
+                      <div className="relative aspect-[4/3]">
+                        <Image
+                          src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=60"
+                          alt="Team collaborating on strategy"
+                          fill
+                          className="object-cover opacity-[0.92]"
+                          sizes="(min-width: 1024px) 360px, 100vw"
+                        />
+                      </div>
+                      <div className="relative border-t border-borderOnBrand bg-headerBg px-5 py-4">
+                        <div className="text-small font-semibold text-onPrimary">Remote-first. Outcome-driven.</div>
+                        <div className="mt-1 text-small text-onPrimaryMuted">
+                          Strategy and execution designed to earn trust and drive measurable growth.
                         </div>
-                      ))}
+                      </div>
                     </div>
-                    <div className="mt-4 text-[12px] text-onPrimarySoft">No spam. No commitment.</div>
+
+                    <div className="rounded-2xl border border-borderOnBrand bg-headerBg p-5 text-onPrimary shadow-sm">
+                      <div className="text-small font-semibold">What we believe</div>
+                      <div className="mt-3 space-y-2 text-small text-onPrimaryMuted">
+                        {[
+                          "Execution beats ideas when it’s consistent.",
+                          "Clarity beats complexity in every funnel.",
+                          "Growth is a system you can measure."
+                        ].map((t) => (
+                          <div key={t} className="flex items-start gap-2">
+                            <Icon name="check_circle" className="mt-0.5 text-[18px] text-onPrimary" />
+                            <span className="min-w-0">{t}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="mt-4 text-[12px] text-onPrimarySoft">No spam. No commitment.</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -117,4 +141,3 @@ export function AboutHeroSection() {
     </LazyMotion>
   );
 }
-

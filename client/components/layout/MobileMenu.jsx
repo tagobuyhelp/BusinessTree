@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
@@ -76,6 +76,11 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
   const [servicesOpen, setServicesOpen] = useState(false);
   const reduceMotion = useReducedMotion();
 
+  const closeMenu = useCallback(() => {
+    setServicesOpen(false);
+    onClose?.();
+  }, [onClose]);
+
   const navLinks = useMemo(
     () => [
       { href: "/case-studies", label: "Case Studies", icon: "workspace_premium" },
@@ -89,7 +94,6 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
   useEffect(() => {
     if (!isOpen) return;
     document.body.classList.add("overflow-hidden");
-    setServicesOpen(false);
     previousFocusRef.current = document.activeElement;
     closeBtnRef.current?.focus?.();
     return () => {
@@ -101,7 +105,7 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
   useEffect(() => {
     if (!isOpen) return;
     const onKeyDown = (e) => {
-      if (e.key === "Escape") onClose?.();
+      if (e.key === "Escape") closeMenu();
       if (e.key !== "Tab") return;
 
       const panel = panelRef.current;
@@ -129,19 +133,18 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isOpen, onClose]);
+  }, [closeMenu, isOpen]);
 
   const onOverlayMouseDown = useCallback(
     (e) => {
-      if (e.target === e.currentTarget) onClose?.();
+      if (e.target === e.currentTarget) closeMenu();
     },
-    [onClose]
+    [closeMenu]
   );
 
   const onNavigate = useCallback(() => {
-    setServicesOpen(false);
-    onClose?.();
-  }, [onClose]);
+    closeMenu();
+  }, [closeMenu]);
 
   return (
     <LazyMotion features={domAnimation}>
@@ -200,7 +203,7 @@ export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }) {
                 <button
                   ref={closeBtnRef}
                   type="button"
-                  onClick={onClose}
+                  onClick={closeMenu}
                   className={cx(
                     "inline-flex h-11 w-11 items-center justify-center rounded-md",
                     "text-textPrimary hover:bg-bg",

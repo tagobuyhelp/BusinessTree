@@ -35,24 +35,78 @@ function WelcomeVisual({ reduceMotion }) {
 
         <div className="relative p-6">
           <div className="flex items-center justify-between">
-            <div className="text-small font-medium text-textPrimary">Growth System</div>
+            <div className="text-small font-medium text-textPrimary">Your Growth Flywheel</div>
             <div className="inline-flex items-center gap-2 text-[11px] font-medium text-textSecondary">
-              <Icon name="insights" className="text-[16px]" />
-              <span>Live signals</span>
+              <Icon name="auto_awesome" className="text-[16px]" />
+              <span>Illustrated system</span>
             </div>
           </div>
 
-          <div className="mt-5 grid grid-cols-3 gap-3">
-            {[
-              { label: "Visibility", value: "↑" },
-              { label: "Leads", value: "3X" },
-              { label: "Revenue", value: "+18%" }
-            ].map((kpi) => (
-              <div key={kpi.label} className="rounded-xl border border-border bg-bg p-3">
-                <div className="text-[11px] font-medium text-textSecondary">{kpi.label}</div>
-                <div className="mt-2 text-body font-semibold text-textPrimary">{kpi.value}</div>
-              </div>
-            ))}
+          <div className="mt-6 rounded-2xl border border-border bg-bg p-5">
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { icon: "travel_explore", label: "Attention" },
+                { icon: "tune", label: "Conversion" },
+                { icon: "verified", label: "Trust" }
+              ].map((step) => (
+                <div key={step.label} className="rounded-xl border border-border bg-surface p-4">
+                  <div className="flex items-center gap-2">
+                    <Icon name={step.icon} className="text-[18px] text-accent" />
+                    <span className="text-small font-semibold text-textPrimary">{step.label}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-4 overflow-hidden rounded-xl border border-border bg-surface">
+              <svg
+                viewBox="0 0 560 180"
+                className="block h-[140px] w-full"
+                role="img"
+                aria-label="Illustration of a growth flywheel connecting channels to measurable outcomes"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <defs>
+                  <linearGradient id="btGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="rgb(16,185,129)" stopOpacity="0.35" />
+                    <stop offset="100%" stopColor="rgb(59,130,246)" stopOpacity="0.25" />
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="560" height="180" rx="16" fill="url(#btGrad)" />
+                <path
+                  d="M40 120 C120 40, 210 160, 280 90 C350 20, 430 140, 520 55"
+                  fill="none"
+                  stroke="rgba(16,185,129,0.8)"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                />
+                {[
+                  { x: 40, y: 120 },
+                  { x: 160, y: 70 },
+                  { x: 280, y: 90 },
+                  { x: 400, y: 60 },
+                  { x: 520, y: 55 }
+                ].map((p, i) => (
+                  <g key={i}>
+                    <circle cx={p.x} cy={p.y} r="10" fill="rgba(255,255,255,0.9)" />
+                    <circle cx={p.x} cy={p.y} r="5" fill="rgba(59,130,246,0.9)" />
+                  </g>
+                ))}
+              </svg>
+            </div>
+
+            <div className="mt-4 grid grid-cols-3 gap-3">
+              {[
+                { label: "Visibility", value: "↑" },
+                { label: "Leads", value: "3X" },
+                { label: "Revenue", value: "+18%" }
+              ].map((kpi) => (
+                <div key={kpi.label} className="rounded-xl border border-border bg-surface p-4">
+                  <div className="text-[11px] font-medium text-textSecondary">{kpi.label}</div>
+                  <div className="mt-2 text-body font-semibold text-textPrimary">{kpi.value}</div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="mt-5 rounded-xl border border-border bg-bg p-4">
