@@ -94,7 +94,7 @@ export function LeadForm({
   );
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-2 py-4 px-4">
       <div>
         <label htmlFor="lead-name" className="text-small font-medium text-textPrimary">
           Name
@@ -103,8 +103,10 @@ export function LeadForm({
           id="lead-name"
           value={values.name}
           onChange={(e) => setField("name", e.target.value)}
+          placeholder="Your name"
           className={cx(
-            "mt-2 h-11 w-full rounded-md border border-border bg-surface px-3 text-body text-textPrimary",
+            "mt-2 h-10 w-full rounded-lg border border-border bg-white px-3 text-small text-textPrimary",
+            "placeholder:text-textSecondary/70",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
             errors.name && "border-error"
           )}
@@ -127,8 +129,10 @@ export function LeadForm({
           id="lead-contact"
           value={values.contact}
           onChange={(e) => setField("contact", e.target.value)}
+          placeholder="Your email or phone number"
           className={cx(
-            "mt-2 h-11 w-full rounded-md border border-border bg-surface px-3 text-body text-textPrimary",
+            "mt-2 h-10 w-full rounded-lg border border-border bg-white px-3 text-small text-textPrimary",
+            "placeholder:text-textSecondary/70",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
             errors.contact && "border-error"
           )}
@@ -153,7 +157,7 @@ export function LeadForm({
           value={values.businessType}
           onChange={(e) => setField("businessType", e.target.value)}
           className={cx(
-            "mt-2 h-11 w-full rounded-md border border-border bg-surface px-3 text-body text-textPrimary",
+            "mt-2 h-10 w-full rounded-lg border border-border bg-white px-3 text-small text-textPrimary",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
             errors.businessType && "border-error"
           )}
@@ -181,9 +185,11 @@ export function LeadForm({
           id="lead-message"
           value={values.message}
           onChange={(e) => setField("message", e.target.value)}
+          placeholder="Tell us about your business goals…"
           rows={3}
           className={cx(
-            "mt-2 w-full resize-none rounded-md border border-border bg-surface px-3 py-2 text-body text-textPrimary",
+            "mt-2 w-full resize-none rounded-lg border border-border bg-white px-3 py-2 text-small text-textPrimary",
+            "placeholder:text-textSecondary/70",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
           )}
         />
@@ -193,17 +199,24 @@ export function LeadForm({
         type="submit"
         disabled={submitting}
         className={cx(
-          "inline-flex h-11 w-full items-center justify-center rounded-md px-4 text-body font-semibold",
-          "bg-accent text-onAccent hover:bg-secondary active:bg-accent",
+          "inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg px-4 text-body font-semibold",
+          "bg-[#2fbe57] text-white hover:bg-[#28a94d] active:bg-[#28a94d]",
           "transition disabled:opacity-60 disabled:pointer-events-none",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
         )}
       >
+        <span className="material-symbols-outlined select-none text-[18px] leading-none" aria-hidden="true">
+          bolt
+        </span>
         {submitLabel}
       </button>
 
-      <div className="text-center text-small text-textSecondary">No spam. No commitment.</div>
+      <div className="flex items-center justify-center gap-2 text-center text-small text-textSecondary">
+        <span className="material-symbols-outlined select-none text-[18px] leading-none text-[#2fbe57]" aria-hidden="true">
+          verified
+        </span>
+        <span>No spam. No commitment.</span>
+      </div>
     </form>
   );
 }
-
