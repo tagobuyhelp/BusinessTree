@@ -20,7 +20,7 @@ export const metadata = buildMetadata({
 
 export default function HomePage() {
   return (
-    <main>
+    <main className="min-h-screen overflow-x-hidden">
       <HeroSection />
 
       <WelcomeSection />
