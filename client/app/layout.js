@@ -83,7 +83,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fontBody.variable} ${fontHeading.variable} overflow-x-hidden`}
+      className={`${fontBody.variable} ${fontHeading.variable}`}
     >
       <head>
         <Script
@@ -105,7 +105,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className="min-h-screen overflow-x-hidden">
+      <body>
         <ThemeProvider>
           <ScrollProgress />
           <CustomCursor />

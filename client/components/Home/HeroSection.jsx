@@ -79,7 +79,7 @@ export function HeroSection() {
           </div>
 
           {/* ── Content ── */}
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10 md:pb-0">
             <div className="py-0 md:py-12 lg:py-0">
 
               <div className="grid grid-cols-1 items-center lg:grid-cols-12 lg:min-h-[92vh] ">
