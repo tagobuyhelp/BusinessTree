@@ -58,8 +58,7 @@ export function HeroSection() {
       <section id="home" className="py-0">
         <div
           ref={heroRef}
-          className="relative overflow-hidden"
-          style={{ background: "linear-gradient(135deg,#1b4d30 0%,#0f3520 45%,#0a2818 100%)" }}
+          className="relative overflow-hidden bg-headerBg"
         >
 
           {/* ── Blobs + grid ── */}
