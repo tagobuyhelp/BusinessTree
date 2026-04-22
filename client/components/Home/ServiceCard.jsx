@@ -72,6 +72,7 @@ export function ServiceCard({
                   )}
                   sizes="(min-width: 640px) 50vw, 33vw"
                   loading="lazy"
+                  unoptimized
                 />
               </div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent" />
