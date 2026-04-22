@@ -99,7 +99,7 @@ export function HeroSection() {
 
                   {/* H1 */}
                   <h1
-                    className="text-[1.35rem] font-extrabold leading-[1.3] tracking-tight text-white md:text-5xl lg:text-[3.65rem]"
+                    className="text-[1.40rem] font-extrabold leading-[1.3] tracking-tight text-white md:text-5xl lg:text-[3.65rem]"
                     style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                   >
                     Grow faster with a<br />
@@ -139,7 +139,7 @@ export function HeroSection() {
                   </div>
 
                   {/* Trust strip */}
-                  <div className="flex flex-nowrap gap-x-2 gap-y-2 text-[12px] text-white/45 w-full z-10">
+                  <div className="flex flex-nowrap gap-x-1 gap-y-1 text-[10px] text-accent w-full z-10">
                     {[
                       { type: "bolt",   label: "Fast execution"      },
                       { type: "wave",   label: "Clear reporting"      },
