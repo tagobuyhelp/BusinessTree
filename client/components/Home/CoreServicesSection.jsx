@@ -15,37 +15,43 @@ export function CoreServicesSection() {
         href: "/services/digital-marketing",
         icon: "insights",
         title: "Digital Marketing",
-        description: "Full-funnel systems that attract, convert, and retain customers."
+        description: "Full-funnel systems that attract, convert, and retain customers.",
+        image: "/images/services/service-digital-marketing.png"
       },
       {
         href: "/services/seo",
         icon: "trending_up",
         title: "SEO (Local + Global)",
-        description: "Rank higher on Google and drive long-term organic growth."
+        description: "Rank higher on Google and drive long-term organic growth.",
+        image: "/images/services/service-seo.png"
       },
       {
         href: "/services/performance-marketing",
         icon: "campaign",
         title: "Performance Marketing",
-        description: "Profit-focused acquisition built for ROI and scale."
+        description: "Profit-focused acquisition built for ROI and scale.",
+        image: "/images/services/service-performance-ads.png"
       },
       {
         href: "/services/web-development",
         icon: "code",
         title: "Web Development",
-        description: "Fast, premium websites that convert traffic into revenue."
+        description: "Fast, premium websites that convert traffic into revenue.",
+        image: "/images/services/service-web-dev.png"
       },
       {
         href: "/services/youtube-growth",
         icon: "smart_display",
         title: "YouTube Growth",
-        description: "Authority + reach systems that increase inbound leads."
+        description: "Authority + reach systems that increase inbound leads.",
+        image: "/images/services/service-youtube.png"
       },
       {
         href: "/services/social-media",
         icon: "public",
         title: "Social Media Management",
-        description: "Consistent presence that builds trust and demand."
+        description: "Consistent presence that builds trust and demand.",
+        image: "/images/services/service-social.png"
       }
     ],
     []
@@ -92,9 +98,10 @@ export function CoreServicesSection() {
                     icon={s.icon}
                     title={s.title}
                     description={s.description}
-                    descriptionLines={1}
-                    showCta={false}
-                    compact
+                    backgroundImage={s.image}
+                    descriptionLines={2}
+                    showCta
+                    ctaLabel="Learn More"
                   />
                 </m.div>
               ))}
