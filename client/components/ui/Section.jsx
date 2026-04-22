@@ -20,7 +20,7 @@ export function Section({ as: As = "section", tone = "default", className, ...pr
 export function SectionInner({ className, ...props }) {
   return (
     <div
-      className={cx("mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8", className)}
+      className={cx("mx-auto w-full min-w-0 max-w-7xl px-4 sm:px-6 lg:px-8", className)}
       {...props}
     />
   );

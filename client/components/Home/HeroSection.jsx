@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -16,10 +17,16 @@ import { HeroVisual } from "./HeroVisual";
 
 function cx(...v) { return v.filter(Boolean).join(" "); }
 
+const LeadModal = dynamic(() => import("../ui/LeadModal").then((m) => m.LeadModal), { ssr: false });
+
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
   const heroRef = useRef(null);
   const [heroImageIndex, setHeroImageIndex] = useState(0);
+  const [leadOpen, setLeadOpen] = useState(false);
+
+  const openLeadModal = useCallback(() => setLeadOpen(true), []);
+  const closeLeadModal = useCallback(() => setLeadOpen(false), []);
 
   useEffect(() => {
     if (reduceMotion) return;
@@ -72,18 +79,18 @@ export function HeroSection() {
           </div>
 
           {/* ── Content ── */}
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10">
             <div className="py-0 md:py-12 lg:py-0">
 
               <div className="grid grid-cols-1 items-center lg:grid-cols-12 lg:min-h-[92vh] ">
 
                 {/* ── LEFT: copy (7 cols) ── */}
                 <m.div
-                  className="flex flex-col gap-6 py-10 lg:col-span-7 lg:justify-center lg:py-0 lg:pr-10"
+                  className="flex flex-col gap-2 py-10 lg:col-span-7 lg:justify-center lg:py-0 lg:pr-10"
                   {...fadeUp(0)}
                 >
                   {/* Badge */}
-                  <div className="inline-flex w-fit items-center gap-2 rounded-full  border border-white/20 bg-white/[0.07] px-3 py-1.5 text-[13px] text-white/75">
+                  <div className="inline-flex w-fit items-center gap-2 rounded-full  border border-white/20 bg-white/[0.07] px-3 py-1.5 text-[10px] md:text-[15px] text-white/75">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.2">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                     </svg>
@@ -92,7 +99,7 @@ export function HeroSection() {
 
                   {/* H1 */}
                   <h1
-                    className="text-[2.35rem] font-extrabold leading-[1.1] tracking-tight text-white md:text-5xl lg:text-[3.65rem]"
+                    className="text-[1.35rem] font-extrabold leading-[1.3] tracking-tight text-white md:text-5xl lg:text-[3.65rem]"
                     style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                   >
                     Grow faster with a<br />
@@ -112,7 +119,8 @@ export function HeroSection() {
                   <div className="flex flex-wrap gap-3 z-10">
                     <button
                       type="button"
-                      className="inline-flex items-center gap-2 rounded-2xl bg-white px-7 py-3.5 text-[15px] font-semibold text-[#0f3520] shadow-lg shadow-black/15 transition hover:bg-green-50 active:scale-[0.98]"
+                      onClick={openLeadModal}
+                      className="inline-flex items-center gap-2 rounded-2xl bg-white px-3 md:px-7 py-2 md:py-3.5 text-[12px] md:text-[15px] font-semibold text-[#0f3520] shadow-lg shadow-black/15 transition hover:bg-green-50 active:scale-[0.98]"
                     >
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
@@ -121,7 +129,7 @@ export function HeroSection() {
                     </button>
                     <Link
                       href="/case-studies"
-                      className="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-transparent px-7 py-3.5 text-[15px] font-medium text-white transition hover:bg-white/10 active:scale-[0.98]"
+                      className="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-transparent px-3 md:px-7 py-2 md:py-3.5 text-[12px] md:text-[15px] font-medium text-white transition hover:bg-white/10 active:scale-[0.98]"
                     >
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
@@ -234,9 +242,9 @@ export function HeroSection() {
                       Photo is a normal img with fixed height.
                       Cards flow below in HeroVisual mobile slot.
                   ───────────────────────────────────────── */}
-                  <div className="lg:hidden mt-[-490px]">
+                  <div className="lg:hidden mt-[-390px]">
                     {/* Photo */}
-                    <div className="relative h-[560px] w-[470px] mb-[-100px]">
+                    <div className="relative h-[460px] w-[470px] mb-[-100px]">
                       <m.div
                         className="absolute inset-0"
                         animate={{ opacity: heroImageIndex === 0 ? 1 : 0 }}
@@ -283,6 +291,7 @@ export function HeroSection() {
 
         </div>
       </section>
+      <LeadModal open={leadOpen} onClose={closeLeadModal} />
     </LazyMotion>
   );
 }

@@ -104,14 +104,14 @@ export function CTASection() {
                   </div>
                 </div>
 
-                <div className="relative lg:col-span-5 mb-[-260px] mt-[-270px] md:mr-[0px] md:mt-[0px] ">
-                  <div className="relative mx-auto h-[520px] w-full max-w-md overflow-visible sm:h-[660px] lg:h-[440px] lg:max-w-none">
-                    <div className="pointer-events-none absolute inset-0 z-10 md:ml-[-520px] mr-[-320px] md:mr-[0px]">
+                <div className="relative lg:col-span-5 mb-[-260px] mt-[-270px] md:mt-[0px]">
+                  <div className="relative mx-auto h-[520px] w-full max-w-md overflow-hidden sm:h-[660px] lg:h-[440px] lg:max-w-none">
+                    <div className="pointer-events-none absolute inset-0 z-10">
                       <Image
                         src="/images/Hero/Female.png"
                         alt="Digital strategy professional"
                         fill
-                        className="object-contain object-bottom opacity-[0.92] scale-[1.18]"
+                        className="object-contain object-[70%_100%] opacity-[0.92] scale-[1.18]"
                         sizes="(min-width: 1024px) 1200px, (min-width: 640px) 720px, 100vw"
                       />
                       

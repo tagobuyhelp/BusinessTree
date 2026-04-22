@@ -102,18 +102,18 @@ export function BottomNav() {
         transition={reduceMotion ? { duration: 0 } : { duration: 0.18, ease: "easeOut" }}
         style={{ pointerEvents: visible ? "auto" : "none" }}
       >
-        <div className="mx-auto w-full max-w-md lg:max-w-lg">
-          <div className="rounded-2xl border border-borderOnBrand bg-headerBg backdrop-blur shadow-xl">
-            <ul className="grid grid-cols-5">
+        <div className="mx-auto w-full min-w-0 max-w-[calc(100vw-24px)] sm:max-w-md lg:max-w-lg">
+          <div className="rounded-2xl border border-borderOnBrand bg-headerBg backdrop-blur shadow-xl overflow-hidden">
+            <ul className="flex w-full min-w-0 max-w-full items-stretch gap-1 overflow-x-auto overscroll-x-contain scroll-smooth px-1">
               {items.map((item) => {
                 const active = activeId === item.id;
                 return (
-                  <li key={item.id} className="relative">
+                  <li key={item.id} className="relative flex-shrink-0">
                     <button
                       type="button"
                       onClick={() => onNavigate(item.id)}
                       className={cx(
-                        "flex w-full flex-col items-center justify-center gap-1 py-3",
+                        "flex min-w-[76px] flex-col items-center justify-center gap-1 py-3",
                         "text-[11px] font-medium",
                         active ? "text-onPrimary" : "text-onPrimaryMuted",
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
