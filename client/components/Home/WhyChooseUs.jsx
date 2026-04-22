@@ -4,7 +4,21 @@ import React, { useMemo } from "react";
 import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 
 import { Section, SectionInner } from "../ui/Section";
-import { PillarCard } from "./PillarCard";
+
+function cx(...values) {
+  return values.filter(Boolean).join(" ");
+}
+
+function Icon({ name, className, "aria-hidden": ariaHidden = true }) {
+  return (
+    <span
+      className={cx("material-symbols-outlined select-none leading-none", className)}
+      aria-hidden={ariaHidden}
+    >
+      {name}
+    </span>
+  );
+}
 
 export function WhyChooseUs() {
   const reduceMotion = useReducedMotion();
@@ -54,12 +68,16 @@ export function WhyChooseUs() {
             transition={reduceMotion ? undefined : { duration: 0.35, ease: "easeOut" }}
             className="space-y-6"
           >
-            <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm sm:p-8">
-              <div className="max-w-2xl border-l-4 border-l-accent pl-4">
+            <div className="rounded-2xl border border-green-100 bg-white/70 p-6 shadow-sm backdrop-blur sm:p-8">
+              <div className="max-w-2xl">
                 <h2 className="text-h2">Why Business Tree Is Different</h2>
-                <p className="mt-3 text-body text-textSecondary line-clamp-2">
+                <p className="mt-3 text-body text-textSecondary">
                   We don’t just market your business — we build systems that drive real growth.
                 </p>
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-green-100 bg-white/70 px-3 py-1 text-[12px] font-medium text-textSecondary">
+                  <Icon name="verified" className="text-[16px] text-green-600" />
+                  <span>Built on proven systems, not guesswork</span>
+                </div>
               </div>
             </div>
 
@@ -77,11 +95,39 @@ export function WhyChooseUs() {
                 <m.div
                   key={p.title}
                   variants={{
-                    hidden: { opacity: 0, y: 10 },
+                    hidden: { opacity: 0, y: 30 },
                     show: { opacity: 1, y: 0 }
                   }}
+                  whileHover={reduceMotion ? undefined : { y: -6 }}
+                  transition={reduceMotion ? undefined : { type: "spring", stiffness: 420, damping: 32 }}
                 >
-                  <PillarCard icon={p.icon} title={p.title} description={p.description} />
+                  <m.article
+                    tabIndex={0}
+                    className={cx(
+                      "group relative h-full min-h-[44px] rounded-2xl border border-green-100 bg-white/80 p-5 backdrop-blur",
+                      "transition-all duration-300 hover:shadow-xl sm:p-6",
+                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                    )}
+                    whileTap={reduceMotion ? undefined : { scale: 0.99 }}
+                    transition={reduceMotion ? undefined : { type: "spring", stiffness: 420, damping: 32 }}
+                  >
+                    <div className="pointer-events-none absolute left-0 top-0 h-[3px] w-full rounded-t-2xl bg-gradient-to-r from-green-500 to-green-300 opacity-70" />
+                    <div className="pointer-events-none absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_top_right,_#22c55e,_transparent)]" />
+
+                    <div className="relative z-10 space-y-3">
+                      <m.div
+                        className="inline-flex w-fit items-center justify-center rounded-xl bg-green-100 p-3 text-green-600"
+                        whileHover={reduceMotion ? undefined : { scale: 1.1, rotate: 2 }}
+                        transition={reduceMotion ? undefined : { type: "spring", stiffness: 420, damping: 26 }}
+                      >
+                        <Icon name={p.icon} className="text-[22px]" />
+                      </m.div>
+                      <div className="text-body font-bold text-textPrimary transition-colors group-hover:text-green-700">
+                        {p.title}
+                      </div>
+                      <div className="text-small leading-relaxed text-textSecondary">{p.description}</div>
+                    </div>
+                  </m.article>
                 </m.div>
               ))}
             </m.div>
