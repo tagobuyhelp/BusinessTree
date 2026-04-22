@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -19,6 +19,15 @@ function cx(...v) { return v.filter(Boolean).join(" "); }
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
   const heroRef = useRef(null);
+  const [heroImageIndex, setHeroImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    const id = window.setInterval(() => {
+      setHeroImageIndex((i) => (i + 1) % 2);
+    }, 2600);
+    return () => window.clearInterval(id);
+  }, [reduceMotion]);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -179,14 +188,36 @@ export function HeroSection() {
                         zIndex: 5,
                       }}
                     >
-                      <Image
-                        src="/images/Hero/Female.png"
-                        alt="Digital strategy professional"
-                        fill
-                        priority
-                        style={{ objectFit: "contain", objectPosition: "bottom center" }}
-                        sizes="(min-width: 1024px) 650px, 100vw"
-                      />
+                      <m.div
+                        className="absolute inset-0"
+                        animate={{ opacity: heroImageIndex === 0 ? 1 : 0 }}
+                        transition={reduceMotion ? { duration: 0 } : { duration: 0.5, ease: "easeOut" }}
+                        style={{ willChange: "opacity" }}
+                      >
+                        <Image
+                          src="/images/Hero/Female.png"
+                          alt="Digital strategy professional"
+                          fill
+                          priority
+                          style={{ objectFit: "contain", objectPosition: "bottom center" }}
+                          sizes="(min-width: 1024px) 650px, 100vw"
+                        />
+                      </m.div>
+                      <m.div
+                        className="absolute inset-0"
+                        animate={{ opacity: heroImageIndex === 1 ? 1 : 0 }}
+                        transition={reduceMotion ? { duration: 0 } : { duration: 0.5, ease: "easeOut" }}
+                        style={{ willChange: "opacity" }}
+                      >
+                        <Image
+                          src="/images/Hero/Male.png"
+                          alt="Digital strategy professional"
+                          fill
+                          priority
+                          style={{ objectFit: "contain", objectPosition: "bottom center" }}
+                          sizes="(min-width: 1024px) 650px, 100vw"
+                        />
+                      </m.div>
                     </div>
 
                     {/* Cards — always above photo */}
@@ -206,14 +237,36 @@ export function HeroSection() {
                   <div className="lg:hidden mt-[-490px]">
                     {/* Photo */}
                     <div className="relative h-[560px] w-[470px] mb-[-100px]">
-                      <Image
-                        src="/images/Hero/Female.png"
-                        alt="Digital strategy professional"
-                        fill
-                        priority
-                        className="object-contain  object-right scale-[.8]"
-                        sizes="(max-width: 640px) 100vw, 720px"
-                      />
+                      <m.div
+                        className="absolute inset-0"
+                        animate={{ opacity: heroImageIndex === 0 ? 1 : 0 }}
+                        transition={reduceMotion ? { duration: 0 } : { duration: 0.5, ease: "easeOut" }}
+                        style={{ willChange: "opacity" }}
+                      >
+                        <Image
+                          src="/images/Hero/Female.png"
+                          alt="Digital strategy professional"
+                          fill
+                          priority
+                          className="object-contain object-right scale-[.8]"
+                          sizes="(max-width: 640px) 100vw, 720px"
+                        />
+                      </m.div>
+                      <m.div
+                        className="absolute inset-0"
+                        animate={{ opacity: heroImageIndex === 1 ? 1 : 0 }}
+                        transition={reduceMotion ? { duration: 0 } : { duration: 0.5, ease: "easeOut" }}
+                        style={{ willChange: "opacity" }}
+                      >
+                        <Image
+                          src="/images/Hero/Male.png"
+                          alt="Digital strategy professional"
+                          fill
+                          priority
+                          className="object-contain object-right scale-[.8]"
+                          sizes="(max-width: 640px) 100vw, 720px"
+                        />
+                      </m.div>
                       
                     </div>
 
