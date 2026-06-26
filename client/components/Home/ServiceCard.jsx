@@ -60,7 +60,7 @@ export function ServiceCard({
         >
           {backgroundImage ? (
             <>
-              <div className="pointer-events-none absolute right-0 top-0 h-full w-1/3 overflow-hidden sm:w-1/2">
+              <div className="pointer-events-none absolute right-0 top-0 h-full w-[44%] overflow-hidden sm:w-1/2">
                 <Image
                   src={backgroundImage}
                   alt=""
@@ -85,7 +85,7 @@ export function ServiceCard({
             </div>
           ) : null}
 
-          <div className={cx("relative z-10 flex h-full flex-col", backgroundImage && "pr-14 sm:pr-20")}>
+          <div className={cx("relative z-10 flex h-full flex-col", backgroundImage && "pr-[38%] sm:pr-[46%]")}>
             <m.div
               className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-bg"
               whileHover={reduceMotion || compact ? undefined : { rotate: featured ? 6 : 4, scale: 1.05 }}

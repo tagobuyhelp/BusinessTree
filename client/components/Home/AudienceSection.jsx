@@ -113,7 +113,7 @@ export function AudienceSection() {
                     "hover:shadow-md"
                   )}
                 >
-                  <div className="pointer-events-none absolute right-0 top-0 h-full w-1/3 overflow-hidden sm:w-1/2">
+                  <div className="pointer-events-none absolute right-0 top-0 h-full w-[44%] overflow-hidden sm:w-1/2">
                     <Image
                       src={audience.image}
                       alt=""
@@ -130,7 +130,7 @@ export function AudienceSection() {
                   </div>
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white via-white/40 to-transparent" />
 
-                  <div className="relative z-10 pr-16 sm:pr-24">
+                  <div className="relative z-10 pr-[38%] sm:pr-[46%]">
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-bg">
                       <Icon name={audience.icon} className="text-[22px] text-accent" />
                     </div>
