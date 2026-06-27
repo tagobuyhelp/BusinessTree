@@ -59,21 +59,21 @@ export function HeroSection() {
         <div
           ref={heroRef}
           className="relative overflow-hidden"
-          style={{ background: "linear-gradient(135deg,#1b4d30 0%,#0f3520 45%,#0a2818 100%)" }}
+          style={{ background: "radial-gradient(ellipse at 50% -20%, #174a2e 0%, #0c2d1c 45%, #081c15 100%)" }}
         >
 
           {/* ── Blobs + grid ── */}
           <div className="pointer-events-none absolute inset-0" aria-hidden>
-            <m.div className="absolute -left-32 -top-32 h-[480px] w-[480px] rounded-full opacity-[0.14]"
-              style={{ background: "#2d7a4a", filter: "blur(80px)", y: reduceMotion ? 0 : blobY1 }} />
-            <m.div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full opacity-[0.18]"
-              style={{ background: "#1b5e35", filter: "blur(90px)", y: reduceMotion ? 0 : blobY2 }} />
-            <m.div className="absolute left-1/2 top-1/3 h-[320px] w-[320px] -translate-x-1/2 rounded-full opacity-[0.10]"
-              style={{ background: "#174d2a", filter: "blur(60px)", y: reduceMotion ? 0 : blobY3 }} />
-            <div className="absolute inset-0 opacity-[0.04]" style={{
+            <m.div className="absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full opacity-[0.18]"
+              style={{ background: "#4ade80", filter: "blur(120px)", y: reduceMotion ? 0 : blobY1 }} />
+            <m.div className="absolute -bottom-40 -right-40 h-[600px] w-[600px] rounded-full opacity-[0.15]"
+              style={{ background: "#22c55e", filter: "blur(140px)", y: reduceMotion ? 0 : blobY2 }} />
+            <m.div className="absolute left-1/2 top-1/3 h-[400px] w-[400px] -translate-x-1/2 rounded-full opacity-[0.12]"
+              style={{ background: "#15803d", filter: "blur(100px)", y: reduceMotion ? 0 : blobY3 }} />
+            <div className="absolute inset-0 opacity-[0.05]" style={{
               backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.6) 1px,transparent 1px)," +
-                "linear-gradient(90deg,rgba(255,255,255,0.6) 1px,transparent 1px)",
+                "linear-gradient(rgba(255,255,255,0.7) 1px,transparent 1px)," +
+                "linear-gradient(90deg,rgba(255,255,255,0.7) 1px,transparent 1px)",
               backgroundSize: "48px 48px",
             }} />
           </div>

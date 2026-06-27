@@ -120,14 +120,14 @@ export function Header() {
         transition={reduceMotion ? undefined : { type: "spring", stiffness: 520, damping: 46 }}
         className={cx("sticky top-0 z-50 w-full", isScrolled && "shadow-lg shadow-black/[0.10]")}
       >
-        <div className={cx("absolute inset-0 pointer-events-none backdrop-blur")}>
+        <div className={cx("absolute inset-0 pointer-events-none backdrop-blur-md")}>
           <m.div
             className="absolute inset-0 bg-headerBg"
             animate={{ opacity: isScrolled ? 0 : 1 }}
             transition={reduceMotion ? { duration: 0 } : { duration: 0.22, ease: "easeOut" }}
           />
           <m.div
-            className="absolute inset-0 bg-primary"
+            className="absolute inset-0 bg-primary/90"
             animate={{ opacity: isScrolled ? 1 : 0 }}
             transition={reduceMotion ? { duration: 0 } : { duration: 0.22, ease: "easeOut" }}
           />

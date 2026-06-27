@@ -106,11 +106,12 @@ export function AudienceSection() {
                   transition={
                     reduceMotion ? undefined : { duration: 0.28, ease: "easeOut", delay: idx * 0.05 }
                   }
-                  whileTap={reduceMotion ? undefined : { scale: 0.99 }}
+                  whileHover={reduceMotion ? undefined : { y: -4, scale: 1.01 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
                   className={cx(
-                    "group relative flex min-h-[44px] h-full flex-col overflow-hidden rounded-xl border border-border",
-                    " p-5 shadow-sm  transition-shadow",
-                    "hover:shadow-md"
+                    "group relative flex min-h-[44px] h-full flex-col overflow-hidden rounded-xl border border-border bg-surface",
+                    " p-5 shadow-sm transition-all duration-300",
+                    "hover:shadow-xl hover:shadow-accent/10 hover:border-accent/30 dark:hover:border-accent/40"
                   )}
                 >
                   <div className="pointer-events-none absolute right-0 top-0 h-full w-[44%] overflow-hidden sm:w-1/2">

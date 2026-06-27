@@ -48,15 +48,15 @@ export function ServiceCard({
       >
         <m.div
           className={cx(
-            "relative flex h-full rounded-xl border",
-            backgroundImage ? "border-green-100 bg-white/80 backdrop-blur" : "border-border bg-surface",
+            "relative flex h-full rounded-xl border transition-all duration-300",
+            backgroundImage ? "border-green-100 bg-white/80 backdrop-blur hover:shadow-xl hover:shadow-accent/10 hover:border-accent/30" : "border-border bg-surface hover:shadow-xl hover:shadow-accent/10 hover:border-accent/30 dark:hover:border-accent/40",
             backgroundImage && "overflow-hidden",
             compact ? "items-center gap-3 p-4 lg:flex-col lg:items-start lg:p-6" : "flex-col p-6",
             featured && "ring-1 ring-accent"
           )}
-          whileHover={reduceMotion || compact ? undefined : { y: -6, scale: 1.02 }}
-          whileTap={reduceMotion ? undefined : { scale: 0.99 }}
-          transition={reduceMotion ? undefined : { type: "spring", stiffness: 420, damping: 34 }}
+          whileHover={reduceMotion || compact ? undefined : { y: -4, scale: 1.01 }}
+          whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+          transition={reduceMotion ? undefined : { type: "spring", stiffness: 350, damping: 30 }}
         >
           {backgroundImage ? (
             <>

@@ -57,10 +57,12 @@
   h1 {
     font-size: var(--text-h1);
     font-weight: var(--weight-bold);
+    letter-spacing: -0.03em;
   }
 
   h2 {
     font-size: var(--text-h2);
+    letter-spacing: -0.02em;
   }
 
   h3 {

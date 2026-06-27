@@ -43,16 +43,16 @@
 }
 
 .dark {
-  --color-bg: #0f172a;
-  --color-surface: #111827;
-  --color-border: #1f2937;
-  --color-text-primary: #f9fafb;
-  --color-text-secondary: #cbd5e1;
-  --color-overlay: rgba(15, 23, 42, 0.6);
-  --color-tint: rgba(15, 61, 46, 0.22);
+  --color-bg: #081c15;
+  --color-surface: #0f291e;
+  --color-border: #1b4332;
+  --color-text-primary: #f8f9fa;
+  --color-text-secondary: #a7c9b8;
+  --color-overlay: rgba(8, 28, 21, 0.7);
+  --color-tint: rgba(15, 61, 46, 0.3);
   --color-on-primary-muted: rgba(255, 255, 255, 0.82);
   --color-on-primary-soft: rgba(255, 255, 255, 0.66);
   --color-border-on-brand: rgba(255, 255, 255, 0.18);
-  --color-header-bg: rgba(15, 61, 46, 0.88);
-  --color-header-hover: rgba(76, 175, 80, 0.14);
+  --color-header-bg: rgba(11, 33, 25, 0.88);
+  --color-header-hover: rgba(76, 175, 80, 0.15);
 }

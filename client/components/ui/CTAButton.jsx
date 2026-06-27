@@ -40,16 +40,16 @@ export function CTAButton({
         onClick={onClick}
         data-cursor="hover"
         className={cx(
-          "inline-flex h-11 items-center justify-center rounded-md px-5 text-body font-semibold",
+          "inline-flex h-11 items-center justify-center rounded-md px-5 text-body font-semibold transition-all duration-300",
           "bg-accent text-onAccent hover:bg-secondary active:bg-accent",
-          "shadow-lg ring-1 ring-accent/30 hover:ring-accent/40",
+          "shadow-lg shadow-accent/20 ring-1 ring-accent/30 hover:shadow-xl hover:shadow-accent/30 hover:ring-accent/50",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
           fullWidth && "w-full",
           className
         )}
-        whileHover={reduceMotion ? undefined : { scale: 1.05 }}
-        whileTap={reduceMotion ? undefined : { scale: 0.95 }}
-        transition={reduceMotion ? undefined : { type: "spring", stiffness: 520, damping: 36 }}
+        whileHover={reduceMotion ? undefined : { scale: 1.03, y: -2 }}
+        whileTap={reduceMotion ? undefined : { scale: 0.97 }}
+        transition={reduceMotion ? undefined : { type: "spring", stiffness: 450, damping: 30 }}
         aria-label={label}
       >
         {icon ? <Icon name={icon} className="text-[20px]" /> : null}
